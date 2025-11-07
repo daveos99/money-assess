@@ -15,9 +15,21 @@ import {
 
 import SurveyButton from "../components/Button"; // adjust the import path as needed
 
+// Helper function to convert numeric score into rating text
+function getRating(overallPercent) {
+  if (overallPercent >= 90) return "💎 Money Master";
+  if (overallPercent >= 80) return "🌟 Great at Money";
+  if (overallPercent >= 70) return "👍 Good with Money";
+  if (overallPercent >= 60) return "🙂 OK with Money";
+  if (overallPercent >= 50) return "😕 Poor with Money";
+  if (overallPercent >= 40) return "⚠️ Need Help with Money";
+  return "🚨 Failing with Money";
+}
+
 export default function ResultsPage({ results, onRestart }) {
   const themes = results && Array.isArray(results.themes) ? results.themes : [];
   const overall = results?.overallPercent ?? 0;
+  const rating = getRating(overall);
 
   if (!themes || themes.length === 0) {
     return (
@@ -50,7 +62,7 @@ export default function ResultsPage({ results, onRestart }) {
   return (
     <div className="max-w-4xl w-full bg-white text-gray-900 rounded-2xl p-8 shadow-lg text-center">
       <h2 className="text-3xl font-bold mb-6 text-indigo-600">
-        Your Financial Wellbeing Results
+        Your Mastering Money Results
       </h2>
 
       
@@ -91,6 +103,11 @@ export default function ResultsPage({ results, onRestart }) {
 
       {/* 🧾 Table Summary */}
       {/*<ThemeSummaryTable themes={themes} overall={overall} />*/}
+      {/* Overall Score Display */}
+      <div className="mb-8">
+        <p className="text-4xl font-extrabold text-indigo-700">Overall Score {overall}%</p>
+        <p className="text-2xl font-semibold mt-2 text-gray-800">{rating}</p>
+      </div>
 
       <SurveyButton onClick={onRestart} className="mt-8">
         Restart Survey

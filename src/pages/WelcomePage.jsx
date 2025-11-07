@@ -4,9 +4,9 @@ import SurveyButton from "../components/Button"; // adjust the import path as ne
 export default function WelcomePage({ onStart }) {
   return (
     <div className="text-center">
-      <h1 className="text-4xl font-bold mb-4">Financial Wellbeing Survey</h1>
+      <h1 className="text-4xl font-bold mb-4">Mastering Money Survey</h1>
       <p className="mb-6 text-lg">
-        Answer a few quick questions to assess your financial wellbeing.
+        Answer a few quick questions to assess how good you are at money.
       </p>
 
       <SurveyButton onClick={onStart} className="mt-8">
