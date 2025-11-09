@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 import PDFDocument from "pdfkit";
-import getStream from "get-stream";
+import { buffer } from "get-stream"; // ✅ correct modern import
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).send("Method not allowed");
@@ -34,8 +34,7 @@ export default async function handler(req, res) {
     }
 
     doc.end();
-    const pdfBuffer = await getStream.buffer(doc);
-
+    const pdfBuffer = await buffer(doc); // 👈 instead of getStream.buffer(doc)
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
       from: "Reports <reports@yourdomain.com>",
