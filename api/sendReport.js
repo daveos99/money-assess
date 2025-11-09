@@ -34,9 +34,9 @@ export default async function handler(req, res) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
-      from: "Reports <reports@yourdomain.com>",
+      from: "Financial Wellbeing <onboarding@resend.dev>",
       to: email,
-      subject: "Your Financial Wellbeing Report",
+      subject: "Your Mastering Money Report",
       text: "Attached is your personalized report.",
       attachments: [
         {
