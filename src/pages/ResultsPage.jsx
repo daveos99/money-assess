@@ -1,5 +1,5 @@
 // src/pages/ResultsPage.jsx
-import React, { useState } from "react";
+import React from "react";
 import {
   BarChart,
   Bar,
@@ -10,6 +10,8 @@ import {
   Cell,
 } from "recharts";
 import SurveyButton from "../components/Button";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import ReportDocument from "../components/ReportDocument";
 
 // Helper: Convert overall score to rating label
 function getRating(overallPercent) {
@@ -23,9 +25,6 @@ function getRating(overallPercent) {
 }
 
 export default function ResultsPage({ results, onRestart }) {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState(null);
-
   const themes = results && Array.isArray(results.themes) ? results.themes : [];
   const overall = results?.overallPercent ?? 0;
   const rating = getRating(overall);
@@ -59,31 +58,6 @@ export default function ResultsPage({ results, onRestart }) {
     score: Math.round((t.total / t.max) * 100),
     fill: colors[i % colors.length],
   }));
-
-  // ✉️ Send report via API
-  const handleSendReport = async () => {
-    if (!email) {
-      setStatus("Please enter a valid email address.");
-      return;
-    }
-    setStatus("Sending...");
-    try {
-      const res = await fetch("/api/sendReport", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          results,
-          responses: results.responses ?? {},
-        }),
-      });
-      if (res.ok) setStatus("✅ Report sent successfully!");
-      else setStatus("❌ Failed to send report.");
-    } catch (err) {
-      console.error(err);
-      setStatus("⚠️ Something went wrong while sending the report.");
-    }
-  };
 
   return (
     <div className="max-w-4xl w-full bg-white text-gray-900 rounded-2xl p-8 shadow-lg text-center">
@@ -132,26 +106,20 @@ export default function ResultsPage({ results, onRestart }) {
         <p className="text-2xl font-semibold mt-2 text-gray-800">{rating}</p>
       </div>
 
-      {/* ✉️ Email Input & Send Button */}
-      <div className="mt-8 flex flex-col items-center gap-3">
-        <input
-          type="email"
-          placeholder="Enter your email to receive a detailed report"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border border-gray-300 rounded-lg px-4 py-2 w-full max-w-sm text-center focus:ring-2 focus:ring-indigo-500 outline-none"
-        />
-        <button
-          onClick={handleSendReport}
-          className="bg-linear-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition"
+      {/* 📄 Download PDF Report */}
+      <div className="mt-8">
+        <PDFDownloadLink
+          document={<ReportDocument results={{ ...results, rating }} />}
+          fileName="MasteringMoneyReport.pdf"
         >
-          Send Report
-        </button>
-        {status && (
-          <p className="text-sm mt-2 text-gray-600 transition-all duration-300">
-            {status}
-          </p>
-        )}
+          {({ loading }) => (
+            <button
+              className="bg-linear-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition"
+            >
+              {loading ? "Generating Report..." : "Download PDF Report"}
+            </button>
+          )}
+        </PDFDownloadLink>
       </div>
 
       {/* 🔁 Restart Survey */}
@@ -161,3 +129,4 @@ export default function ResultsPage({ results, onRestart }) {
     </div>
   );
 }
+
