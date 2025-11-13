@@ -251,7 +251,7 @@ export default function ReasonsPage({ onComplete }) {
               {customReasons.length < 3 && (
                 <button
                   onClick={handleAddCustomReason}
-                  className="text-indigo-600 font-semibold mt-4 hover:underline"
+                  className="text-indigo-600 font-semibold mt-4 hover:underline bg-white border border-indigo-100 px-4 py-2 rounded-lg"
                 >
                   + Add Your Own Reason
                 </button>
@@ -302,7 +302,7 @@ export default function ReasonsPage({ onComplete }) {
                           className={`w-full px-4 py-2 rounded-md border flex items-center justify-between ${
                             selected
                               ? "bg-indigo-600 text-white border-indigo-600"
-                              : "border-gray-300 hover:bg-gray-100"
+                              : "bg-white text-gray-900 border-gray-300 hover:bg-gray-50"
                           }`}
                         >
                           <span className="text-left">{reason.text}</span>
