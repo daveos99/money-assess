@@ -41,10 +41,18 @@ const PRESET_REASONS = [
 
 const REASON_OPTIONS = ["True", "Somewhat True", "False"];
 
+const INITIAL_CUSTOM_REASONS = [
+  { id: "c1", text: "" },
+  { id: "c2", text: "" },
+  { id: "c3", text: "" },
+];
+
 export default function ReasonsPage({ onComplete }) {
   const [showIntro, setShowIntro] = useState(true);
   const [responses, setResponses] = useState({});
-  const [customReasons, setCustomReasons] = useState([]);
+  const [customReasons, setCustomReasons] = useState(() =>
+    INITIAL_CUSTOM_REASONS.map((reason) => ({ ...reason }))
+  );
   const [stage, setStage] = useState("preset");
   const [ranking, setRanking] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -65,14 +73,6 @@ export default function ReasonsPage({ onComplete }) {
     } else {
       setCurrentIndex((idx) => idx + 1);
     }
-  };
-
-  const handleAddCustomReason = () => {
-    if (customReasons.length >= 3) return;
-    setCustomReasons((prev) => [
-      ...prev,
-      { id: `c${prev.length + 1}`, text: "" },
-    ]);
   };
 
   const handleCustomChange = (id, text) => {
@@ -171,22 +171,21 @@ export default function ReasonsPage({ onComplete }) {
             What's Holding You Back?
           </h2>
           <p className="text-gray-700 text-lg mb-6">
-            Before we finish, let's take a moment to reflect on what might be
-            getting in the way of improving your financial wellbeing.
+            In the next section you will step through a series of statements 
+            and select whether they are True, Somewhat True or False for you.
           </p>
           <p className="text-gray-700 text-lg mb-6">
-            You'll see each common barrier one at a time. Let us know if it
-            stops you, somewhat affects you, or doesn't apply. We'll move to the
-            next reason as soon as you answer.
+            You will be able to add up to 3 additional statements of your own 
+            to explain what else you believe is holding you back.
           </p>
           <p className="text-gray-700 text-lg mb-6">
-            After the preset reasons, you can add up to three of your own before
-            picking the top barriers that deserve your focus.
+            At the end you will be asked to rank up to 3 statements as your top 
+            reasons for what’s stopping you get better at money.
           </p>
           <button
             onClick={() => {
               setResponses({});
-              setCustomReasons([]);
+              setCustomReasons(INITIAL_CUSTOM_REASONS.map((reason) => ({ ...reason })));
               setRanking([]);
               setCurrentIndex(0);
               setStage("preset");
@@ -194,7 +193,7 @@ export default function ReasonsPage({ onComplete }) {
             }}
             className="bg-linear-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition"
           >
-            Start Reflection
+            Continue
           </button>
         </motion.div>
       ) : (
@@ -225,18 +224,15 @@ export default function ReasonsPage({ onComplete }) {
                 Add Your Own Reasons
               </h2>
               <p className="text-gray-600 mb-6 text-sm">
-                Add up to three personal barriers.
+                Add up to three personal barriers. Leave any field blank if you do not have an additional reason.
               </p>
 
               <div className="space-y-4">
-                {customReasons.length === 0 && (
-                  <div className="text-sm text-gray-500 border border-dashed border-gray-300 rounded-xl p-4 text-center">
-                    No custom reasons yet. Add one below or continue to ranking.
-                  </div>
-                )}
-
-                {customReasons.map((reason) => (
-                  <div key={reason.id} >
+                {customReasons.map((reason, index) => (
+                  <div key={reason.id}>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">
+                      Custom Reason {index + 1}
+                    </label>
                     <input
                       type="text"
                       value={reason.text}
@@ -247,15 +243,6 @@ export default function ReasonsPage({ onComplete }) {
                   </div>
                 ))}
               </div>
-
-              {customReasons.length < 3 && (
-                <button
-                  onClick={handleAddCustomReason}
-                  className="text-indigo-600 font-semibold mt-4 hover:underline bg-white border border-indigo-100 px-4 py-2 rounded-lg"
-                >
-                  + Add Your Own Reason
-                </button>
-              )}
 
               <div className="mt-8 flex justify-end">
                 <button
