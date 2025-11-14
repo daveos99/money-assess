@@ -4,42 +4,42 @@ import QuestionCard from "../components/QuestionCard";
 import ProgressBar from "../components/ProgressBar";
 
 const PRESET_REASONS = [
-  { id: "r1", text: "I am not that motivated to do anything about it" },
-  { id: "r2", text: "I am already good enough with money" },
-  { id: "r3", text: "It feels overwhelming or unpleasant" },
-  { id: "r4", text: "I am stressed about or ashamed of my current situation" },
+  { id: "r1", text: "I am not that motivated to get better at money" },
+  { id: "r2", text: "I don't need to get better at money as I am already good enough" },
+  { id: "r3", text: "The thought of tring to get better at money feels overwhelming or unpleasant" },
+  { id: "r4", text: "I am too stressed about or ashamed of my current situation and can't think about getting better at money" },
   { id: "r5", text: "I don't want to admit that I have a money problem" },
-  { id: "r6", text: "No matter what I do I am screwed anyway, so why do anything" },
-  { id: "r7", text: "I don't want to give up my current lifestyle" },
-  { id: "r8", text: "I don't really think or worry about the future - YOLO" },
-  { id: "r9", text: "I cannot control or do not want to control my spending" },
+  { id: "r6", text: "No matter what I do I am screwed anyway, so why bother trying to get better at money" },
+  { id: "r7", text: "I don't want to give up my current lifestyle to get better at money" },
+  { id: "r8", text: "I don't really think or worry about the future and getting better at money - YOLO" },
+  { id: "r9", text: "I cannot control or do not want to control my spending to get better at money" },
   {
     id: "r10",
-    text: "I have limited or no financial literacy (e.g. budgeting, compounding, super, credit)",
+    text: "I can't get better at money as I have limited or no financial literacy about things like budgeting, compounding, super, credit",
   },
-  { id: "r11", text: "I don't want to have to create or run a budget" },
-  { id: "r12", text: "I don't understand how money works" },
-  { id: "r13", text: "I don't like or can't use spreadsheets" },
-  { id: "r14", text: "I don't like or don't have the time to learn about personal finance" },
-  { id: "r15", text: "I'm not smart enough to learn financial literacy" },
-  { id: "r16", text: "I'm no good at maths" },
-  { id: "r17", text: "I don't know how to get better" },
-  { id: "r18", text: "I am no good with money" },
-  { id: "r19", text: "I don't earn enough money to be able to save any" },
-  { id: "r20", text: "I am scared or anxious about money" },
-  { id: "r21", text: "I have bigger problems (Health, Relationships, Addiction, Gambling, etc.)" },
+  { id: "r11", text: "I don't want to have to create or run a budget to get better at money" },
+  { id: "r12", text: "I can't get better at money as I don't understand how money works" },
+  { id: "r13", text: "I can't get better at money as I don't like or can't use spreadsheets" },
+  { id: "r14", text: "I don't like or don't have the time to learn about personal finance to get better at money" },
+  { id: "r15", text: "I'm not smart enough to get better at money" },
+  { id: "r16", text: "I can't get better at money as I'm no good at maths" },
+  { id: "r17", text: "I don't know how to get better at money" },
+  { id: "r18", text: "I can't get better at money as I am no good with money" },
+  { id: "r19", text: "I can't get better at money as I don't earn enough money to be able to save any" },
+  { id: "r20", text: "I can't get better at money as I am scared or anxious about money" },
+  { id: "r21", text: "I can't get better at money as I have bigger problems (Health, Relationships, Addiction, Gambling, etc.)" },
   {
     id: "r22",
-    text: "I use my spending to provide relief from other problems (Retail therapy)",
+    text: "My spending provides relief from other problems (Retail therapy) and might stop me getting better at money",
   },
-  { id: "r23", text: "I am too busy and don't have time to deal with it" },
-  { id: "r24", text: "I don't trust other people to give me good advice" },
-  { id: "r25", text: "I don't know who to trust or believe" },
-  { id: "r26", text: "I have been burnt before" },
-  { id: "r27", text: "I cannot afford the cost of getting help" },
+  { id: "r23", text: "I am too busy and don't have time to get better at money" },
+  { id: "r24", text: "I don't trust other people to give me good advice on how to get better at money" },
+  { id: "r25", text: "I don't know who to trust or believe to help me get better at money" },
+  { id: "r26", text: "I have been burnt before when trying to get better at money" },
+  { id: "r27", text: "I cannot afford the cost of getting help to get better at money" },
 ];
 
-const REASON_OPTIONS = ["Yes", "Somewhat", "No"];
+const REASON_OPTIONS = ["True", "Somewhat True", "False"];
 
 export default function ReasonsPage({ onComplete }) {
   const [showIntro, setShowIntro] = useState(true);
@@ -85,7 +85,7 @@ export default function ReasonsPage({ onComplete }) {
     setResponses((prev) => {
       const next = { ...prev };
       if (text.trim()) {
-        next[id] = "Yes";
+        next[id] = "True";
       } else {
         delete next[id];
       }
@@ -208,9 +208,9 @@ export default function ReasonsPage({ onComplete }) {
         >
           {stage === "preset" && reasonQuestion && (
             <>
-              <h2 className="text-2xl font-bold text-indigo-600 mb-4">
+              {/*<h2 className="text-2xl font-bold text-indigo-600 mb-4">
                 What's stopping you from being better at money...
-              </h2>
+              </h2>*/}
               <ProgressBar current={currentIndex + 1} total={totalPreset} />
               <QuestionCard
                 question={reasonQuestion}
@@ -278,7 +278,7 @@ export default function ReasonsPage({ onComplete }) {
               </p>
 
               {(() => {
-                const affirmative = ["Yes", "Somewhat"];
+                const affirmative = ["True", "Somewhat True"];
                 const candidates = allReasons.filter((reason) =>
                   affirmative.includes(responses[reason.id])
                 );

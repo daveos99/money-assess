@@ -139,7 +139,7 @@ export default function ReportDocument({ results }) {
 
   const answeredReasons = (reasons?.responses || []).filter((r) => {
     const ans = (r?.answer || "").trim();
-    return ans === "Yes" || ans === "Somewhat";
+    return ans === "True" || ans === "Somewhat True";
   });
   const hasTopThree = Array.isArray(reasons?.topThree) && reasons.topThree.length > 0;
 
