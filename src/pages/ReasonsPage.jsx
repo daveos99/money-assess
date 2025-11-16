@@ -172,7 +172,7 @@ export default function ReasonsPage({ onComplete }) {
           </h2>
           <p className="text-gray-700 text-lg mb-6">
             In the next section you will step through a series of statements 
-            and you select whether they are True, Somewhat True or False for you.
+            and select whether they are True, Somewhat True or False for you.
           </p>
           <p className="text-gray-700 text-lg mb-6">
             You will be able to add up to 3 additional statements of your own 
