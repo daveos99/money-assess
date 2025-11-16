@@ -10,7 +10,7 @@ export default function PleaseNotePage({ onContinue }) {
         should complete it in one sitting as your answers are not saved so you
         will have to restart the whole assessment if you leave and come back.
       </p>
-      <SurveyButton onClick={onContinue}>Continue</SurveyButton>
+      <SurveyButton onClick={onContinue}>Start Assessment</SurveyButton>
     </div>
   );
 }

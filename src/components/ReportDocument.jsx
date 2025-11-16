@@ -121,11 +121,35 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     backgroundColor: "#ECFDF5",
   },
+  recipientLine: {
+    fontSize: 12,
+    color: "#374151",
+    marginBottom: 16,
+    textAlign: "center",
+  },
 });
 
 export default function ReportDocument({ results }) {
-  const { themes = [], overallPercent = 0, ratingForReport = "", reasons } =
-    results || {};
+  const {
+    themes = [],
+    overallPercent = 0,
+    ratingForReport = "",
+    reasons,
+    preferredName = "",
+  } = results || {};
+
+  const recipientName =
+    typeof preferredName === "string" ? preferredName.trim() : "";
+  const generationDate = new Date();
+  const formattedDate = generationDate.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const formattedTime = generationDate.toLocaleTimeString(undefined, {
+    hour: "numeric",
+    minute: "2-digit",
+  });
 
   // Filter unanswered items
   const themesWithAnswers = themes
@@ -149,6 +173,11 @@ export default function ReportDocument({ results }) {
       <Page size="A4" style={styles.page}>
         {/* ===== TITLE ===== */}
         <Text style={styles.heading}>Mastering Money Report</Text>
+        {recipientName && (
+          <Text style={styles.recipientLine}>
+            {`Prepared for ${recipientName} on ${formattedDate} ${formattedTime}`}
+          </Text>
+        )}
 
         {/* ===== OVERALL SUMMARY ===== */}
         <Text
@@ -210,7 +239,7 @@ export default function ReportDocument({ results }) {
               src="https://calendar.app.google/ZduxYZefWuWEY3F3A"
               style={styles.ctaLink}
             >
-              Click here to book a chat with a Money Coach
+              Click here to book a free chat with a Money Coach
             </Link>
           </View>
         )}

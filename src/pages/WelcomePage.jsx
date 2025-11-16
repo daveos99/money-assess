@@ -11,7 +11,7 @@ export default function WelcomePage({ onStart }) {
       </p>
 
       <SurveyButton onClick={onStart} className="mt-8">
-        Start Assessment
+        Start
       </SurveyButton>
 
       <p className="mt-6 text-sm text-white/80">{VERSION_LABEL}</p>

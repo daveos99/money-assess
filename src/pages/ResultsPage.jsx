@@ -117,7 +117,7 @@ export default function ResultsPage({ results, onRestart }) {
       {/* 📊 Horizontal Bar Chart */}
       {chartData.length > 0 && (
         <div className="w-full mb-10">
-          <div className="max-w-3xl mx-auto" style={{ height: 400 }}>
+          <div className="max-w-3xl mx-auto" style={{ height: 280 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={chartData}
@@ -128,6 +128,7 @@ export default function ResultsPage({ results, onRestart }) {
                 <YAxis
                   type="category"
                   dataKey="theme"
+                  interval={0}
                   tick={{ fontSize: 12, fill: "#333" }}
                   width={150}
                 />
@@ -164,14 +165,15 @@ export default function ResultsPage({ results, onRestart }) {
           <p className="mt-3 text-sm text-red-600">{pdfError}</p>
         )}
       </div>
-      <div className="mt-6">
+
+      <div className="mt-6">
         <a
           href="https://calendar.app.google/ZduxYZefWuWEY3F3A"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center justify-center bg-emerald-500 text-white px-6 py-3 rounded-xl font-semibold shadow hover:bg-emerald-600 transition"
         >
-          Book a chat with a Money Coach
+          Book a free chat with a Money Coach
         </a>
       </div>
 
