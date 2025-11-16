@@ -15,6 +15,11 @@ export default function WelcomePage({ onStart }) {
       </SurveyButton>
 
       <p className="mt-6 text-sm text-white/80">{VERSION_LABEL}</p>
+      <p className="mt-2 text-xs text-white/70">
+        © 2025 David Williams. All rights reserved. <br />
+        No part of this website may be reproduced or
+        distributed without written permission.
+      </p>
     </div>
   );
 }

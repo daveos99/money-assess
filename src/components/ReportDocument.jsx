@@ -239,7 +239,7 @@ export default function ReportDocument({ results }) {
               src="https://calendar.app.google/ZduxYZefWuWEY3F3A"
               style={styles.ctaLink}
             >
-              Click here to book a free chat with a Money Coach
+              Click here to book a free money chat with Dave
             </Link>
           </View>
         )}

@@ -173,7 +173,7 @@ export default function ResultsPage({ results, onRestart }) {
           rel="noreferrer"
           className="inline-flex items-center justify-center bg-emerald-500 text-white px-6 py-3 rounded-xl font-semibold shadow hover:bg-emerald-600 transition"
         >
-          Book a free chat with a Money Coach
+          Book a free money chat with Dave
         </a>
       </div>
 

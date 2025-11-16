@@ -19,7 +19,7 @@ export default function PreferredNamePage({ initialName = "", onContinue }) {
   return (
     <div className="text-center max-w-2xl bg-white text-gray-900 rounded-2xl p-8 shadow-lg">
       <h2 className="text-3xl font-semibold mb-6 text-indigo-600">
-        What should we call you?
+        What should we call you (and your partner)?
       </h2>
       <p className="text-lg leading-relaxed mb-8 text-gray-700">
         We'll include this in your personalised PDF report so it feels like it
@@ -30,7 +30,7 @@ export default function PreferredNamePage({ initialName = "", onContinue }) {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Enter your preferred name"
+          placeholder="Enter your (and partners) preferred name"
           className="w-full max-w-md px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
         />
         {error && <p className="text-sm text-red-600 mt-3">{error}</p>}
