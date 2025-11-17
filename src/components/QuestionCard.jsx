@@ -4,14 +4,14 @@ export default function QuestionCard({ question, onAnswer }) {
   if (!question) return null;
 
   return (
-    <div className="text-center">
+    <div className="text-center w-full">
       {/* Question text */}
-      <h3 className="text-2xl font-semibold mb-8 text-gray-900">
+      <h3 className="text-2xl font-semibold mb-8 text-gray-900 w-full">
         {question.text}
       </h3>
 
       {/* Answer buttons */}
-      <div className="flex flex-col gap-4 items-center">
+      <div className="flex flex-col gap-4 items-center w-full">
         {question.options.map((opt, i) => (
           <button
             key={i}

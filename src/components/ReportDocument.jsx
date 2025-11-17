@@ -296,10 +296,10 @@ export default function ReportDocument({ results }) {
     ? [baseRecipientName, partnerName].filter(Boolean).join(" & ")
     : baseRecipientName;
   const generationDate = new Date();
-  const formattedDate = generationDate.toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "long",
+  const formattedDate = generationDate.toLocaleDateString("en-GB", {
     day: "numeric",
+    month: "long",
+    year: "numeric",
   });
   const formattedTime = generationDate.toLocaleTimeString(undefined, {
     hour: "numeric",

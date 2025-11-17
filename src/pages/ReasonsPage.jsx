@@ -211,7 +211,7 @@ export default function ReasonsPage({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4 }}
-          className="max-w-xl w-full bg-white text-gray-900 rounded-2xl p-8 shadow-lg text-center"
+          className="w-full sm:w-[640px] max-w-2xl bg-white text-gray-900 rounded-2xl p-8 shadow-lg text-center"
         >
           <h2 className="text-3xl font-bold text-indigo-600 mb-4">
             What's Holding You Back?
@@ -249,7 +249,7 @@ export default function ReasonsPage({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4 }}
-          className="max-w-xl w-full bg-white text-gray-900 rounded-2xl p-8 shadow-lg"
+          className="w-full sm:w-[640px] max-w-2xl bg-white text-gray-900 rounded-2xl p-8 shadow-lg"
         >
           {stage === "preset" && reasonQuestion && (
             <>
