@@ -28,8 +28,7 @@ export default function PreferredNamePage({
         Who is taking the assessment?
       </h2>
       <p className="text-lg leading-relaxed mb-8 text-gray-700">
-        Tell us the name you want to see on your personalised report. Add your
-        partner's name as well if you are completing the assessment together.
+        Tell us your preferred name, and your partners preferred name if you are completing the assessment as a couple.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col items-center gap-6">
         <div className="w-full max-w-md text-left">

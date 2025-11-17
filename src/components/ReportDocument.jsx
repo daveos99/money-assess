@@ -24,108 +24,235 @@ const styles = StyleSheet.create({
     fontFamily: "DejaVuSans",
     padding: 32,
     fontSize: 11,
-    color: "#111827",
+    color: "#0f172a",
+    backgroundColor: "#F8FAFC",
   },
-  heading: {
+  heroSection: {
+    backgroundColor: "#312E81",
+    borderRadius: 18,
+    padding: 20,
+    color: "#FFFFFF",
+    marginBottom: 8,
+  },
+  heroHeading: {
+    fontSize: 22,
+    fontWeight: 700,
+    color: "#FFFFFF",
+    marginBottom: 4,
+  },
+  heroSubheading: {
+    fontSize: 12,
+    color: "#E0E7FF",
+    marginBottom: 2,
+  },
+  heroMeta: {
+    fontSize: 11,
+    color: "#C7D2FE",
+  },
+  heroStats: {
+    flexDirection: "row",
+    marginTop: 16,
+  },
+  heroStatBlock: {
+    flexGrow: 1,
+    borderRadius: 14,
+    border: "1px solid rgba(255,255,255,0.2)",
+    padding: 12,
+    backgroundColor: "rgba(255,255,255,0.08)",
+  },
+  heroStatValue: {
     fontSize: 20,
     fontWeight: 700,
-    color: "#1E3A8A",
-    marginBottom: 10,
+    color: "#FFFFFF",
+    marginBottom: 4,
+  },
+  heroStatLabel: {
+    fontSize: 11,
+    color: "#E0E7FF",
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: 700,
-    marginTop: 20,
-    marginBottom: 6,
+    marginBottom: 8,
     color: "#1E3A8A",
+  },
+  sectionCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 16,
+    padding: 16,
+    marginTop: 8,
+    border: "1px solid #E2E8F0",
   },
   text: {
     marginBottom: 6,
-    lineHeight: 1.5,
-  },
-  themeBlock: {
-    marginTop: 10,
-    marginBottom: 14,
-    padding: 8,
-    border: "1px solid #E5E7EB",
-    borderRadius: 4,
+    lineHeight: 1.4,
+    color: "#475569",
   },
   barRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 6,
+    marginBottom: 8,
   },
-  barLabel: { width: "30%", fontSize: 10 },
+  barLabel: { width: "30%", fontSize: 10, color: "#0f172a" },
   barTrack: {
     flexGrow: 1,
-    height: 8,
-    backgroundColor: "#E5E7EB",
-    borderRadius: 4,
+    height: 10,
+    backgroundColor: "#E2E8F0",
+    borderRadius: 50,
     overflow: "hidden",
+    position: "relative",
+  },
+  barFillWrapper: {
+    height: 10,
+    borderRadius: 50,
+    overflow: "hidden",
+    position: "relative",
   },
   barFill: {
-    height: 8,
-    backgroundColor: "#4F46E5",
-    borderRadius: 4,
+    height: 10,
+    borderRadius: 50,
+  },
+  barFillOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(20,184,166,0.35)",
   },
   questionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottom: "1px solid #D1D5DB",
-    paddingBottom: 4,
-    marginBottom: 4,
+    paddingBottom: 6,
+    borderBottom: "1px solid #E2E8F0",
+    marginBottom: 6,
   },
   questionRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottom: "1px solid #E5E7EB",
-    paddingVertical: 3,
-  },
-  questionText: { width: "70%" },
-  answerText: { width: "30%", textAlign: "right" },
-  reasonRow: {
-    borderBottom: "1px solid #E5E7EB",
     paddingVertical: 4,
+    borderBottom: "1px solid #F1F5F9",
+  },
+  questionRowHighlight: {
+    backgroundColor: "#FEF2F2",
+  },
+  questionText: { width: "70%", color: "#0f172a" },
+  answerText: {
+    width: "30%",
+    textAlign: "right",
+    color: "#0f172a",
+  },
+  topBarrierGrid: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    flexWrap: "wrap",
+    marginTop: 8,
   },
-  pageBreak: {
-    marginTop: 32,
-    paddingTop: 20,
+  themeBlock: {
+    borderRadius: 12,
+    border: "1px solid #E2E8F0",
+    padding: 12,
+    marginBottom: 12,
+    backgroundColor: "#F8FAFC",
   },
-  footer: {
-    position: "absolute",
-    bottom: 24,
-    left: 32,
-    right: 32,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderTop: "1px solid #E5E7EB",
-    paddingTop: 8,
-  },
-  footerText: {
-    fontSize: 9,
-    color: "#6B7280",
-  },
-  ctaLink: {
+  topBarrierList: {
+    flexDirection: "column",
+    gap: 6,
     marginTop: 12,
+  },
+  topBarrierRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+  },
+  topBarrierBadge: {
+    fontSize: 10,
+    fontWeight: 700,
+    color: "#6366F1",
+    marginRight: 8,
+    paddingTop: 2,
+  },
+  topBarrierText: {
+    flex: 1,
+    fontSize: 11,
+    color: "#0f172a",
+    lineHeight: 1.4,
+  },
+  ctaCard: {
+    backgroundColor: "#0F766E",
+    borderRadius: 16,
+    padding: 18,
+    marginTop: 4,
+    color: "#FFFFFF",
+  },
+  ctaHeading: {
+    fontSize: 14,
+    fontWeight: 700,
+    color: "#FFFFFF",
+    marginBottom: 4,
+  },
+  ctaText: {
+    fontSize: 11,
+    color: "#ECFDF5",
+    marginBottom: 10,
+    lineHeight: 1.5,
+  },
+  ctaButton: {
     fontSize: 12,
-    color: "#047857",
+    color: "#0F172A",
     textDecoration: "none",
-    borderWidth: 1,
-    borderColor: "#10B981",
-    borderRadius: 4,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
     paddingVertical: 6,
     paddingHorizontal: 12,
     textAlign: "center",
     fontWeight: 700,
-    backgroundColor: "#ECFDF5",
   },
-  recipientLine: {
-    fontSize: 12,
-    color: "#374151",
-    marginBottom: 16,
-    textAlign: "center",
+  reasonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 6,
+    borderBottom: "1px solid #E2E8F0",
+  },
+  reasonText: {
+    width: "65%",
+    color: "#0f172a",
+  },
+  reasonChip: {
+    minWidth: 60,
+    textAlign: "right",
+    fontSize: 10,
+    borderRadius: 999,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    fontWeight: 700,
+    color: "#0f172a",
+  },
+  reasonChipTrue: {
+    backgroundColor: "#DCFCE7",
+    color: "#166534",
+  },
+  reasonChipSomewhat: {
+    backgroundColor: "#FEF9C3",
+    color: "#854D0E",
+  },
+  reasonChipFalse: {
+    backgroundColor: "#E0F2FE",
+    color: "#075985",
+  },
+  footerBar: {
+    position: "absolute",
+    bottom: 24,
+    left: 32,
+    right: 32,
+    borderRadius: 12,
+    backgroundColor: "#1E293B",
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  footerText: {
+    fontSize: 9,
+    color: "#F1F5F9",
   },
 });
 
@@ -186,89 +313,95 @@ export default function ReportDocument({ results }) {
     <Document>
       {/* ===== PAGE 1 ===== */}
       <Page size="A4" style={styles.page}>
-        {/* ===== TITLE ===== */}
-        <Text style={styles.heading}>Mastering Money Report</Text>
-        {recipientName && (
-          <Text style={styles.recipientLine}>
-            {`Prepared for ${recipientName} on ${formattedDate} ${formattedTime}`}
-          </Text>
-        )}
-
-        {/* ===== OVERALL SUMMARY ===== */}
-        <Text
-          style={{
-            fontSize: 14,
-            fontWeight: "bold",
-            textAlign: "center",
-            marginBottom: 4,
-          }}
-        >
-          Overall Score: {overallPercent}%
-        </Text>
-        <Text
-          style={{
-            fontSize: 14,
-            fontWeight: "bold",
-            textAlign: "center",
-            marginBottom: 10,
-          }}
-        >
-          Rating: {ratingForReport}
-        </Text>
-
-        {/* ===== THEME SUMMARY BAR CHART ===== */}
-        <Text style={styles.sectionTitle}>Theme Summary</Text>
-        {themes.map((theme, index) => {
-          const barColor = THEME_COLORS[index % THEME_COLORS.length];
-          return (
-            <View key={theme.themeId} style={styles.barRow}>
-              <Text style={styles.barLabel}>{theme.themeName}</Text>
-              <View style={styles.barTrack}>
-                <View
-                  style={[
-                    styles.barFill,
-                    {
-                      width: `${Math.min(theme.percent, 100)}%`,
-                      backgroundColor: barColor,
-                    },
-                  ]}
-                />
-              </View>
-              <Text style={{ width: 30, textAlign: "right", fontSize: 10 }}>
-                {theme.percent}%
-              </Text>
+        <View style={styles.heroSection}>
+          <Text style={styles.heroHeading}>Mastering Money Report</Text>
+          {recipientName && (
+            <Text style={styles.heroSubheading}>
+              {`Prepared for ${recipientName}`}
+            </Text>
+          )}
+          <Text style={styles.heroMeta}>{`${formattedDate} • ${formattedTime}`}</Text>
+          <View style={styles.heroStats}>
+            <View style={[styles.heroStatBlock, { marginRight: 12 }]}>
+              <Text style={styles.heroStatValue}>{overallPercent}%</Text>
+              <Text style={styles.heroStatLabel}>Overall Score</Text>
             </View>
-          );
-        })}
+            <View style={styles.heroStatBlock}>
+              <Text style={styles.heroStatValue}>{ratingForReport}</Text>
+              <Text style={styles.heroStatLabel}>Rating</Text>
+            </View>
+          </View>
+        </View>
 
-        {/* ===== TOP 3 REASONS ===== */}
+        <View style={styles.ctaCard}>
+          <Text style={styles.ctaHeading}>Do you want to get better at money?</Text>
+          <Text style={styles.ctaText}>
+            Reviewing your results with a money coach can help you define your next steps.
+          </Text>
+          <Link
+            src="https://calendar.app.google/ZduxYZefWuWEY3F3A"
+            style={styles.ctaButton}
+          >
+            Clich here to book a money chat with Dave - No cost or obligation
+          </Link>
+        </View>
+
+        <View style={styles.sectionCard}>
+          <Text style={styles.sectionTitle}>Theme Summary</Text>
+          {themes.map((theme, index) => {
+            const barColor = THEME_COLORS[index % THEME_COLORS.length];
+            const width = Math.min(theme.percent, 100);
+            return (
+              <View key={theme.themeId} style={styles.barRow}>
+                <Text style={styles.barLabel}>{theme.themeName}</Text>
+                <View style={styles.barTrack}>
+                  <View
+                    style={[
+                      styles.barFillWrapper,
+                      { width: `${width}%` },
+                    ]}
+                  >
+                    <View
+                      style={[
+                        styles.barFill,
+                        {
+                          backgroundColor: barColor,
+                        },
+                      ]}
+                    />
+                    <View style={styles.barFillOverlay} />
+                  </View>
+                </View>
+                <Text style={{ width: 30, textAlign: "right", fontSize: 10 }}>
+                  {theme.percent}%
+                </Text>
+              </View>
+            );
+          })}
+        </View>
+
         {hasTopThree && (
-          <View style={{ marginTop: 24 }}>
+          <View style={styles.sectionCard}>
             <Text style={styles.sectionTitle}>Your Top Barriers</Text>
-            {reasons.topThree.map((r, i) => (
-              <Text key={r.id} style={styles.text}>
-                {i + 1}. {r.text} {/*({`#${i + 1}`})*/}
-              </Text>
-            ))}
-            <Link
-              src="https://calendar.app.google/ZduxYZefWuWEY3F3A"
-              style={styles.ctaLink}
-            >
-              Click here to book a money chat with Dave - no cost or obligation
-            </Link>
+            <View style={styles.topBarrierList}>
+              {reasons.topThree.map((r, i) => (
+                <View key={r.id} style={styles.topBarrierRow}>
+                  <Text style={styles.topBarrierBadge}>{`#${i + 1}`}</Text>
+                  <Text style={styles.topBarrierText}>{r.text}</Text>
+                </View>
+              ))}
+            </View>
           </View>
         )}
 
-        {/* ===== DETAILED BREAKDOWN ===== */}
         {!!themesWithAnswers.length && (
-          <View style={styles.pageBreak} break>
+          <View style={styles.sectionCard} break>
             <Text style={styles.sectionTitle}>Detailed Breakdown</Text>
             {themesWithAnswers.map(({ theme, answeredQuestions }, idx) => (
               <View key={theme.themeId} style={styles.themeBlock} wrap={false}>
-                {/* Column Headers */}
                 <View style={styles.questionHeader}>
                   <Text style={{ width: "70%", fontWeight: "bold" }}>
-                    {`${theme.themeName} = ${theme.percent}%`}
+                    {`${theme.themeName} • ${theme.percent}%`}
                   </Text>
                   <Text
                     style={{
@@ -281,7 +414,6 @@ export default function ReportDocument({ results }) {
                   </Text>
                 </View>
 
-                {/* Questions & Answers (answered only) */}
                 {answeredQuestions.map((q) => {
                   const highlight =
                     typeof q.score === "number" && Number(q.score) === 0;
@@ -290,7 +422,7 @@ export default function ReportDocument({ results }) {
                       key={q.id}
                       style={[
                         styles.questionRow,
-                        highlight && { backgroundColor: "#FEE2E2" },
+                        highlight && styles.questionRowHighlight,
                       ]}
                     >
                       <Text style={styles.questionText}>{q.text}</Text>
@@ -301,7 +433,6 @@ export default function ReportDocument({ results }) {
                   );
                 })}
 
-                {/* Force page break every 3-4 themes for readability */}
                 {idx > 0 && idx % 3 === 0 && (
                   <View style={{ pageBreakAfter: "always" }} />
                 )}
@@ -310,34 +441,36 @@ export default function ReportDocument({ results }) {
           </View>
         )}
 
-        {/* ===== REASONS SECTION ===== */}
         {answeredReasons.length > 0 && (
-          <View style={styles.pageBreak} break>
+          <View style={styles.sectionCard} break>
             <Text style={styles.sectionTitle}>
-              What's holding you back from being better at money?
+              What's holding you back right now?
             </Text>
-
-            {/* All reasons with responses */}
             {answeredReasons.map((r) => {
               const rankIndex = reasons?.topThree?.findIndex(
                 (top) => top.id === r.id
               );
               const rankSuffix = rankIndex > -1 ? ` (#${rankIndex + 1})` : "";
+              const answer = r.answer || "";
+              const chipStyle =
+                answer === "True"
+                  ? styles.reasonChipTrue
+                  : answer === "Somewhat True"
+                  ? styles.reasonChipSomewhat
+                  : styles.reasonChipFalse;
               return (
                 <View key={r.id} style={styles.reasonRow}>
-                  <Text style={{ width: "70%" }}>
+                  <Text style={styles.reasonText}>
                     {r.text}
                     {rankSuffix}
                   </Text>
-                  <Text style={{ width: "30%", textAlign: "right" }}>
-                    {r.answer}
-                  </Text>
+                  <Text style={[styles.reasonChip, chipStyle]}>{answer}</Text>
                 </View>
               );
             })}
           </View>
         )}
-        <View style={styles.footer} fixed>
+        <View style={styles.footerBar} fixed>
           <Text style={styles.footerText}>
             {`Mastering Money Assessment ${VERSION_LABEL}`}
           </Text>
@@ -352,4 +485,3 @@ export default function ReportDocument({ results }) {
     </Document>
   );
 }
-

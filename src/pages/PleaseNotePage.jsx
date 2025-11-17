@@ -6,9 +6,10 @@ export default function PleaseNotePage({ onContinue }) {
     <div className="text-center max-w-2xl">
       <h2 className="text-3xl font-semibold mb-6">Please note</h2>
       <p className="text-lg leading-relaxed mb-8">
-        This assessment will typically take around 10 minutes to complete. You
-        should complete it in one sitting as your answers are not saved so you
-        will have to restart the whole assessment if you leave and come back.
+        This assessment will typically take around 10 minutes to complete. <br /><br />
+        You should complete it in one sitting as your answers are not saved so you
+        will have to restart the whole assessment if you leave and come back.<br /><br />
+        Consider each question carefully as there is no back button to change your answers. 
       </p>
       <SurveyButton onClick={onContinue}>Start Assessment</SurveyButton>
     </div>
