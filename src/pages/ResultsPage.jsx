@@ -10,6 +10,7 @@ import {
   Cell,
 } from "recharts";
 import SurveyButton from "../components/Button";
+import BackButton from "../components/BackButton";
 import { usePDF } from "@react-pdf/renderer";
 import ReportDocument from "../components/ReportDocument";
 import { THEME_COLORS } from "../constants/colors";
@@ -36,7 +37,7 @@ function getRating(overallPercent) {
   return "🚨 Failing with Money";
 }
 
-export default function ResultsPage({ results, onRestart }) {
+export default function ResultsPage({ results, onRestart, onBack }) {
   const themes = results && Array.isArray(results.themes) ? results.themes : [];
   const overall = results?.overallPercent ?? 0;
   const rating = getRating(overall);
@@ -76,14 +77,19 @@ export default function ResultsPage({ results, onRestart }) {
 
   if (!themes || themes.length === 0) {
     return (
-      <div className="max-w-3xl w-full bg-white text-gray-900 rounded-2xl p-8 shadow-lg text-center">
+      <div className="max-w-3xl w-full bg-white text-gray-900 rounded-2xl p-6 shadow-lg text-center">
+        {onBack && (
+          <div className="mb-4 text-left">
+            <BackButton onClick={onBack} />
+          </div>
+        )}
         <h2 className="text-2xl font-bold mb-4 text-indigo-600">
           No results to display
         </h2>
-        <p className="text-sm text-gray-600 mb-6">
+        <p className="text-sm text-gray-600 mb-4">
           It looks like there are no completed responses yet.
         </p>
-        <SurveyButton onClick={onRestart} className="mt-8">
+        <SurveyButton onClick={onRestart} className="mt-4">
           Restart Survey
         </SurveyButton>
       </div>
@@ -101,23 +107,28 @@ export default function ResultsPage({ results, onRestart }) {
   }));
 
   return (
-    <div className="max-w-4xl w-full bg-white text-gray-900 rounded-2xl p-8 shadow-lg text-center">
-      <h2 className="text-3xl font-bold mb-6 text-indigo-600">
+    <div className="max-w-4xl w-full bg-white text-gray-900 rounded-2xl p-6 shadow-lg text-center">
+      {onBack && (
+        <div className="mb-4 text-left">
+          <BackButton onClick={onBack} />
+        </div>
+      )}
+      <h2 className="text-3xl font-bold mb-4 text-indigo-600">
         Your Mastering Money Results
       </h2>
 
       {/* 💯 Overall Score */}
-      <div className="mb-8">
-        <p className="text-4xl font-extrabold text-indigo-700">
+      <div className="mb-5">
+        <p className="text-4xl font-extrabold text-indigo-700 leading-tight">
           Overall Score: {overall}%
         </p>
-        <p className="text-2xl font-semibold mt-2 text-gray-800">{rating}</p>
+        <p className="text-xl font-semibold mt-1 text-gray-800">{rating}</p>
       </div>
 
       {/* 📊 Horizontal Bar Chart */}
       {chartData.length > 0 && (
-        <div className="w-full mb-10">
-          <div className="max-w-3xl mx-auto" style={{ height: 280 }}>
+        <div className="w-full mb-6">
+          <div className="max-w-3xl mx-auto" style={{ height: 220 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={chartData}
@@ -149,7 +160,7 @@ export default function ResultsPage({ results, onRestart }) {
       )}
 
       {/* 📄 Download PDF Report */}
-      <div className="mt-8">
+      <div className="mt-5">
         <button
           onClick={handleDownloadPdf}
           disabled={!results || isGeneratingPdf}
@@ -159,14 +170,14 @@ export default function ResultsPage({ results, onRestart }) {
               : "hover:from-indigo-700 hover:to-purple-700"
           }`}
         >
-          {isGeneratingPdf ? "Generating Report..." : "Download Detailed Report"}
+          {isGeneratingPdf ? "Generating..." : "Download Detailed Report"}
         </button>
         {pdfError && (
           <p className="mt-3 text-sm text-red-600">{pdfError}</p>
         )}
       </div>
 
-      <div className="mt-6">
+      <div className="mt-4">
         <a
           href="https://calendar.app.google/ZduxYZefWuWEY3F3A"
           target="_blank"
@@ -178,7 +189,7 @@ export default function ResultsPage({ results, onRestart }) {
       </div>
 
       {/* 🔁 Restart Survey */}
-      <SurveyButton onClick={onRestart} className="mt-10">
+      <SurveyButton onClick={onRestart} className="mt-6">
         Restart Survey
       </SurveyButton>
     </div>

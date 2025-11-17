@@ -1,18 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import WelcomePage from "./pages/WelcomePage";
 import PreferredNamePage from "./pages/PreferredNamePage";
 import PleaseNotePage from "./pages/PleaseNotePage";
 import SurveyPage from "./pages/SurveyPage";
 import ResultsPage from "./pages/ResultsPage";
 import { surveyDataByType } from "./data/surveydata";
+import { createInitialSurveyState } from "./constants/assessmentState";
+import {
+  clearAssessmentSnapshot,
+  loadAssessmentSnapshot,
+  persistAssessmentSnapshot,
+} from "./utils/assessmentStorage";
 
 export default function App() {
-  const [stage, setStage] = useState("welcome"); // "welcome" | "preferred-name" | "please-note" | "survey" | "results"
-  const [results, setResults] = useState(null);
-  const [participantNames, setParticipantNames] = useState({
-    primary: "",
-    partner: "",
-  });
+  const snapshotRef = useRef(loadAssessmentSnapshot());
+  const snapshot = snapshotRef.current;
+
+  const [stage, setStage] = useState(snapshot?.stage ?? "welcome"); // "welcome" | "preferred-name" | "please-note" | "survey" | "results"
+  const [results, setResults] = useState(snapshot?.results ?? null);
+  const [participantNames, setParticipantNames] = useState(
+    snapshot?.participantNames ?? {
+      primary: "",
+      partner: "",
+    }
+  );
+  const [surveyState, setSurveyState] = useState(
+    snapshot?.surveyState ?? createInitialSurveyState()
+  );
+
+  useEffect(() => {
+    persistAssessmentSnapshot({
+      stage,
+      results,
+      participantNames,
+      surveyState,
+    });
+  }, [stage, results, participantNames, surveyState]);
 
   const trimmedPrimaryName = participantNames.primary.trim();
   const trimmedPartnerName = participantNames.partner.trim();
@@ -38,7 +61,9 @@ export default function App() {
   const handleRestart = () => {
     setResults(null);
     setParticipantNames({ primary: "", partner: "" });
+    setSurveyState(createInitialSurveyState());
     setStage("welcome");
+    clearAssessmentSnapshot();
   };
 
   return (
@@ -50,6 +75,8 @@ export default function App() {
         <PreferredNamePage
           initialPrimaryName={participantNames.primary}
           initialPartnerName={participantNames.partner}
+          onNamesChange={(names) => setParticipantNames(names)}
+          onBack={() => setStage("welcome")}
           onContinue={({ primary, partner }) => {
             setParticipantNames({ primary, partner });
             setStage("please-note");
@@ -57,17 +84,27 @@ export default function App() {
         />
       )}
       {stage === "please-note" && (
-        <PleaseNotePage onContinue={() => setStage("survey")} />
+        <PleaseNotePage
+          onBack={() => setStage("preferred-name")}
+          onContinue={() => setStage("survey")}
+        />
       )}
       {stage === "survey" && (
         <SurveyPage
           data={surveyData}
           participantType={participantType}
+          initialState={surveyState}
+          onStateChange={setSurveyState}
+          onBack={() => setStage("please-note")}
           onComplete={handleSurveyComplete}
         />
       )}
       {stage === "results" && (
-        <ResultsPage results={results} onRestart={handleRestart} />
+        <ResultsPage
+          results={results}
+          onRestart={handleRestart}
+          onBack={() => setStage("survey")}
+        />
       )}
     </div>
   );

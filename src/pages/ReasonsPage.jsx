@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import QuestionCard from "../components/QuestionCard";
 import ProgressBar from "../components/ProgressBar";
+import { createInitialReasonsState } from "../constants/assessmentState";
+import BackButton from "../components/BackButton";
 
 const SINGLE_PRESET_REASONS = [
   { id: "r1", text: "I am not that motivated to get better at money" },
@@ -82,24 +84,117 @@ const PRESET_REASONS_BY_TYPE = {
 
 const REASON_OPTIONS = ["True", "Somewhat True", "False"];
 
-const INITIAL_CUSTOM_REASONS = [
-  { id: "c1", text: "" },
-  { id: "c2", text: "" },
-  { id: "c3", text: "" },
-];
-
 export default function ReasonsPage({
   onComplete,
   participantType = "single",
+  initialState,
+  onStateChange,
+  onBack,
 }) {
-  const [showIntro, setShowIntro] = useState(true);
-  const [responses, setResponses] = useState({});
-  const [customReasons, setCustomReasons] = useState(() =>
-    INITIAL_CUSTOM_REASONS.map((reason) => ({ ...reason }))
+  const defaultsRef = useRef(createInitialReasonsState());
+  const defaults = defaultsRef.current;
+
+  const [showIntro, setShowIntro] = useState(
+    initialState?.showIntro ?? defaults.showIntro
   );
-  const [stage, setStage] = useState("preset");
-  const [ranking, setRanking] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [responses, setResponses] = useState(
+    () => ({ ...(initialState?.responses ?? defaults.responses) })
+  );
+  const [customReasons, setCustomReasons] = useState(() =>
+    (initialState?.customReasons ?? defaults.customReasons).map((reason) => ({
+      ...reason,
+    }))
+  );
+  const [stage, setStage] = useState(initialState?.stage ?? defaults.stage);
+  const [ranking, setRanking] = useState(() =>
+    (initialState?.ranking ?? defaults.ranking).map((entry) => ({ ...entry }))
+  );
+  const [currentIndex, setCurrentIndex] = useState(
+    initialState?.currentIndex ?? defaults.currentIndex
+  );
+  const beginReasonsFlow = () => {
+    const base = createInitialReasonsState();
+    setResponses(base.responses);
+    setCustomReasons(base.customReasons);
+    setRanking(base.ranking);
+    setCurrentIndex(base.currentIndex);
+    setStage(base.stage);
+    setShowIntro(false);
+  };
+
+  useEffect(() => {
+    onStateChange?.({
+      showIntro,
+      responses,
+      customReasons,
+      stage,
+      ranking,
+      currentIndex,
+    });
+  }, [
+    showIntro,
+    responses,
+    customReasons,
+    stage,
+    ranking,
+    currentIndex,
+    onStateChange,
+  ]);
+
+  const removeResponsesForIds = (...ids) => {
+    setResponses((prev) => {
+      const next = { ...prev };
+      ids.forEach((id) => {
+        if (id) {
+          delete next[id];
+        }
+      });
+      return next;
+    });
+  };
+
+  const handleBackClick = () => {
+    if (showIntro) {
+      onBack?.();
+      return;
+    }
+
+    if (stage === "ranking") {
+      setStage("custom");
+      return;
+    }
+
+    if (stage === "custom") {
+      if (totalPreset > 0) {
+        const lastIndex = totalPreset - 1;
+        const lastId = presetReasons[lastIndex]?.id;
+        removeResponsesForIds(lastId);
+        setStage("preset");
+        setCurrentIndex(lastIndex);
+        setShowIntro(false);
+        return;
+      }
+      setShowIntro(true);
+      setStage("preset");
+      return;
+    }
+
+    if (stage === "preset") {
+      if (currentIndex > 0) {
+        const currentId = presetReasons[currentIndex]?.id;
+        const prevId = presetReasons[currentIndex - 1]?.id;
+        removeResponsesForIds(currentId, prevId);
+        setCurrentIndex((idx) => Math.max(idx - 1, 0));
+        return;
+      }
+      const firstId = presetReasons[0]?.id;
+      removeResponsesForIds(firstId);
+      setShowIntro(true);
+      return;
+    }
+
+    onBack?.();
+  };
 
   const presetReasons =
     PRESET_REASONS_BY_TYPE[participantType] || SINGLE_PRESET_REASONS;
@@ -213,6 +308,11 @@ export default function ReasonsPage({
           transition={{ duration: 0.4 }}
           className="w-full sm:w-[640px] max-w-2xl bg-white text-gray-900 rounded-2xl p-8 shadow-lg text-center"
         >
+          {onBack && (
+            <div className="mb-4 text-left">
+              <BackButton onClick={handleBackClick} />
+            </div>
+          )}
           <h2 className="text-3xl font-bold text-indigo-600 mb-4">
             What's Holding You Back?
           </h2>
@@ -229,14 +329,7 @@ export default function ReasonsPage({
             reasons for what’s stopping you get better at money.
           </p>
           <button
-            onClick={() => {
-              setResponses({});
-              setCustomReasons(INITIAL_CUSTOM_REASONS.map((reason) => ({ ...reason })));
-              setRanking([]);
-              setCurrentIndex(0);
-              setStage("preset");
-              setShowIntro(false);
-            }}
+            onClick={beginReasonsFlow}
             className="bg-linear-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition"
           >
             Continue
@@ -251,6 +344,11 @@ export default function ReasonsPage({
           transition={{ duration: 0.4 }}
           className="w-full sm:w-[640px] max-w-2xl bg-white text-gray-900 rounded-2xl p-8 shadow-lg"
         >
+          {onBack && (
+            <div className="mb-4 text-left">
+              <BackButton onClick={handleBackClick} />
+            </div>
+          )}
           {stage === "preset" && reasonQuestion && (
             <>
               {/*<h2 className="text-2xl font-bold text-indigo-600 mb-4">

@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import SurveyButton from "../components/Button";
+import BackButton from "../components/BackButton";
 
 export default function PreferredNamePage({
   initialPrimaryName = "",
   initialPartnerName = "",
   onContinue,
+  onNamesChange,
+  onBack,
 }) {
   const [primaryName, setPrimaryName] = useState(initialPrimaryName);
   const [partnerName, setPartnerName] = useState(initialPartnerName);
   const [error, setError] = useState("");
+
+  const emitNameChange = (nextPrimary, nextPartner) => {
+    onNamesChange?.({ primary: nextPrimary, partner: nextPartner });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,7 +30,12 @@ export default function PreferredNamePage({
   };
 
   return (
-    <div className="text-center max-w-2xl bg-white text-gray-900 rounded-2xl p-8 shadow-lg">
+    <div className="text-center max-w-2xl bg-white text-gray-900 rounded-2xl p-8 shadow-lg relative">
+      {onBack && (
+        <div className="absolute left-6 top-6">
+          <BackButton onClick={onBack} />
+        </div>
+      )}
       <h2 className="text-3xl font-semibold mb-6 text-indigo-600">
         Who is taking the assessment?
       </h2>
@@ -42,7 +54,11 @@ export default function PreferredNamePage({
             id="primaryName"
             type="text"
             value={primaryName}
-            onChange={(e) => setPrimaryName(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              setPrimaryName(value);
+              emitNameChange(value, partnerName);
+            }}
             placeholder="Enter your name"
             className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
           />
@@ -58,7 +74,11 @@ export default function PreferredNamePage({
             id="partnerName"
             type="text"
             value={partnerName}
-            onChange={(e) => setPartnerName(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              setPartnerName(value);
+              emitNameChange(primaryName, value);
+            }}
             placeholder="Enter your partner's name"
             className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
           />
