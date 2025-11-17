@@ -159,7 +159,7 @@ export default function ResultsPage({ results, onRestart }) {
               : "hover:from-indigo-700 hover:to-purple-700"
           }`}
         >
-          {isGeneratingPdf ? "Generating Report..." : "Download PDF Report"}
+          {isGeneratingPdf ? "Generating Report..." : "Download Detailed Report"}
         </button>
         {pdfError && (
           <p className="mt-3 text-sm text-red-600">{pdfError}</p>
