@@ -788,7 +788,7 @@ export const coupleSurveyData = [
     questions: [
       {
         id: "7.1",
-        text: "Are you both on track to acheive a comfortable living standard in retirement?",
+        text: "Are you on track to acheive a comfortable living standard in retirement as a couple?",
         options: [
           { label: "Yes", value: 2, next: "7.2" },
           { label: "No", value: 0, next: "7.2" },
