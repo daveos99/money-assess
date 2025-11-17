@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import QuestionCard from "../components/QuestionCard";
 import ProgressBar from "../components/ProgressBar";
 
-const PRESET_REASONS = [
+const SINGLE_PRESET_REASONS = [
   { id: "r1", text: "I am not that motivated to get better at money" },
   { id: "r2", text: "I don't need to get better at money as I am already good enough" },
   { id: "r3", text: "The thought of tring to get better at money feels overwhelming or unpleasant" },
@@ -39,6 +39,47 @@ const PRESET_REASONS = [
   { id: "r27", text: "I cannot afford the cost of getting help to get better at money" },
 ];
 
+const COUPLE_PRESET_REASONS = [
+  { id: "r1", text: "We are not that motivated to get better at money" },
+  { id: "r2", text: "We don't need to get better at money as we are already good enough" },
+  { id: "r3", text: "The thought of tring to get better at money feels overwhelming or unpleasant" },
+  { id: "r4", text: "We are too stressed about or ashamed of our current situation and can't think about getting better at money" },
+  { id: "r5", text: "We don't want to admit that we have a money problem" },
+  { id: "r6", text: "No matter what we do we are screwed anyway, so why bother trying to get better at money" },
+  { id: "r7", text: "We don't want to give up our current lifestyle to get better at money" },
+  { id: "r8", text: "We don't really think or worry about the future and getting better at money - YOLO" },
+  { id: "r9", text: "We cannot control or do not want to control our spending to get better at money" },
+  {
+    id: "r10",
+    text: "We can't get better at money as we have limited or no financial literacy about things like budgeting, compounding, super, credit",
+  },
+  { id: "r11", text: "We don't want to have to create or run a budget to get better at money" },
+  { id: "r12", text: "We can't get better at money as we don't understand how money works" },
+  { id: "r13", text: "We can't get better at money as we don't like or can't use spreadsheets" },
+  { id: "r14", text: "We don't like or don't have the time to learn about personal finance to get better at money" },
+  { id: "r15", text: "We are not smart enough to get better at money" },
+  { id: "r16", text: "We can't get better at money as we are not good at maths" },
+  { id: "r17", text: "We don't know how to get better at money" },
+  { id: "r18", text: "We can't get better at money as we are no good with money" },
+  { id: "r19", text: "We can't get better at money as we don't earn enough money to be able to save any" },
+  { id: "r20", text: "We can't get better at money as we are scared or anxious about money" },
+  { id: "r21", text: "We can't get better at money as we have bigger problems (Health, Relationships, Addiction, Gambling, etc.)" },
+  {
+    id: "r22",
+    text: "Our spending provides relief from other problems (Retail therapy) and might stop us getting better at money",
+  },
+  { id: "r23", text: "We are too busy and don't have time to get better at money" },
+  { id: "r24", text: "We don't trust other people to give us good advice on how to get better at money" },
+  { id: "r25", text: "We don't know who to trust or believe to help us get better at money" },
+  { id: "r26", text: "We have been burnt before when trying to get better at money" },
+  { id: "r27", text: "We cannot afford the cost of getting help to get better at money" },
+];
+
+const PRESET_REASONS_BY_TYPE = {
+  single: SINGLE_PRESET_REASONS,
+  couple: COUPLE_PRESET_REASONS,
+};
+
 const REASON_OPTIONS = ["True", "Somewhat True", "False"];
 
 const INITIAL_CUSTOM_REASONS = [
@@ -47,7 +88,10 @@ const INITIAL_CUSTOM_REASONS = [
   { id: "c3", text: "" },
 ];
 
-export default function ReasonsPage({ onComplete }) {
+export default function ReasonsPage({
+  onComplete,
+  participantType = "single",
+}) {
   const [showIntro, setShowIntro] = useState(true);
   const [responses, setResponses] = useState({});
   const [customReasons, setCustomReasons] = useState(() =>
@@ -57,8 +101,10 @@ export default function ReasonsPage({ onComplete }) {
   const [ranking, setRanking] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const totalPreset = PRESET_REASONS.length;
-  const activeReason = PRESET_REASONS[currentIndex];
+  const presetReasons =
+    PRESET_REASONS_BY_TYPE[participantType] || SINGLE_PRESET_REASONS;
+  const totalPreset = presetReasons.length;
+  const activeReason = presetReasons[currentIndex];
 
   const recordResponse = (id, value) => {
     setResponses((prev) => ({ ...prev, [id]: value }));
@@ -101,7 +147,7 @@ export default function ReasonsPage({ onComplete }) {
     (reason) => reason.text.trim() !== ""
   );
 
-  const allReasons = [...PRESET_REASONS, ...validCustomReasons];
+  const allReasons = [...presetReasons, ...validCustomReasons];
 
   const toggleRanking = (reason) => {
     setRanking((prev) => {

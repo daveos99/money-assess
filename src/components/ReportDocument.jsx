@@ -136,10 +136,25 @@ export default function ReportDocument({ results }) {
     ratingForReport = "",
     reasons,
     preferredName = "",
+    participantNames,
+    participantType,
   } = results || {};
 
-  const recipientName =
+  const primaryName =
+    typeof participantNames?.primary === "string"
+      ? participantNames.primary.trim()
+      : "";
+  const partnerName =
+    typeof participantNames?.partner === "string"
+      ? participantNames.partner.trim()
+      : "";
+  const fallbackPreferred =
     typeof preferredName === "string" ? preferredName.trim() : "";
+  const baseRecipientName = primaryName || fallbackPreferred;
+  const showCoupleNames = participantType === "couple" && partnerName;
+  const recipientName = showCoupleNames
+    ? [baseRecipientName, partnerName].filter(Boolean).join(" & ")
+    : baseRecipientName;
   const generationDate = new Date();
   const formattedDate = generationDate.toLocaleDateString(undefined, {
     year: "numeric",
@@ -239,7 +254,7 @@ export default function ReportDocument({ results }) {
               src="https://calendar.app.google/ZduxYZefWuWEY3F3A"
               style={styles.ctaLink}
             >
-              Click here to book a free money chat with Dave
+              Click here to book a money chat with Dave - no cost or obligation
             </Link>
           </View>
         )}

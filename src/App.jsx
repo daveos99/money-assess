@@ -4,25 +4,40 @@ import PreferredNamePage from "./pages/PreferredNamePage";
 import PleaseNotePage from "./pages/PleaseNotePage";
 import SurveyPage from "./pages/SurveyPage";
 import ResultsPage from "./pages/ResultsPage";
-import { surveyData } from "./data/surveydata";
+import { surveyDataByType } from "./data/surveydata";
 
 export default function App() {
   const [stage, setStage] = useState("welcome"); // "welcome" | "preferred-name" | "please-note" | "survey" | "results"
-  const [responses, setResponses] = useState({});
   const [results, setResults] = useState(null);
-  const [preferredName, setPreferredName] = useState("");
+  const [participantNames, setParticipantNames] = useState({
+    primary: "",
+    partner: "",
+  });
+
+  const trimmedPrimaryName = participantNames.primary.trim();
+  const trimmedPartnerName = participantNames.partner.trim();
+  const participantType = trimmedPartnerName ? "couple" : "single";
+  const surveyData = surveyDataByType[participantType] ?? [];
 
   const handleSurveyComplete = (computedResults) => {
+    const payload = {
+      primary: trimmedPrimaryName,
+      partner: trimmedPartnerName,
+    };
     setResults({
       ...computedResults,
-      preferredName: preferredName.trim(),
+      participantType,
+      participantNames: payload,
+      preferredName: trimmedPartnerName
+        ? `${trimmedPrimaryName} & ${trimmedPartnerName}`
+        : trimmedPrimaryName,
     });
     setStage("results");
   };
 
   const handleRestart = () => {
     setResults(null);
-    setPreferredName("");
+    setParticipantNames({ primary: "", partner: "" });
     setStage("welcome");
   };
 
@@ -33,9 +48,10 @@ export default function App() {
       )}
       {stage === "preferred-name" && (
         <PreferredNamePage
-          initialName={preferredName}
-          onContinue={(name) => {
-            setPreferredName(name);
+          initialPrimaryName={participantNames.primary}
+          initialPartnerName={participantNames.partner}
+          onContinue={({ primary, partner }) => {
+            setParticipantNames({ primary, partner });
             setStage("please-note");
           }}
         />
@@ -44,7 +60,11 @@ export default function App() {
         <PleaseNotePage onContinue={() => setStage("survey")} />
       )}
       {stage === "survey" && (
-        <SurveyPage data={surveyData} onComplete={handleSurveyComplete} />
+        <SurveyPage
+          data={surveyData}
+          participantType={participantType}
+          onComplete={handleSurveyComplete}
+        />
       )}
       {stage === "results" && (
         <ResultsPage results={results} onRestart={handleRestart} />

@@ -4,7 +4,11 @@ import ProgressBar from "../components/ProgressBar";
 import { motion, AnimatePresence } from "framer-motion";
 import ReasonsPage from "./ReasonsPage"; // ✅ new import
 
-export default function SurveyPage({ data, onComplete }) {
+export default function SurveyPage({
+  data,
+  onComplete,
+  participantType = "single",
+}) {
   const [currentQuestionId, setCurrentQuestionId] = useState("1.1");
   const [responses, setResponses] = useState({});
   const [showThemeIntro, setShowThemeIntro] = useState(true);
@@ -87,6 +91,7 @@ export default function SurveyPage({ data, onComplete }) {
   if (showReasons && surveyResults) {
     return (
       <ReasonsPage
+        participantType={participantType}
         onComplete={(reasonsData) => {
           const mergedResults = {
             ...surveyResults,
