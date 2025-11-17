@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   noteText: {
     marginBottom: 8,
-    lineHeight: 1.05,
+    lineHeight: 0.80,
     color: "#475569",
   },
   barRow: {
@@ -255,6 +255,12 @@ const styles = StyleSheet.create({
   reasonChipFalse: {
     backgroundColor: "#E0F2FE",
     color: "#075985",
+  },
+  reasonDivider: {
+    height: 1,
+    backgroundColor: "#E2E8F0",
+    marginTop: 8,
+    marginBottom: 12,
   },
   footerBar: {
     position: "absolute",
@@ -467,6 +473,7 @@ export default function ReportDocument({ results }) {
               that you entered, that you selected as either True or Somewhat True
               indicating they were holding you back from getting better at money.
             </Text>
+            <View style={styles.reasonDivider} />
             {answeredReasons.map((r) => {
               const rankIndex = reasons?.topThree?.findIndex(
                 (top) => top.id === r.id
