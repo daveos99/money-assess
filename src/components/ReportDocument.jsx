@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   noteText: {
     marginBottom: 8,
-    lineHeight: 1.2,
+    lineHeight: 1.05,
     color: "#475569",
   },
   barRow: {
