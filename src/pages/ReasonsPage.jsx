@@ -354,7 +354,7 @@ export default function ReasonsPage({
                   disabled={ranking.length === 0}
                   className="bg-linear-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition disabled:opacity-50"
                 >
-                  Finish Reflection
+                  Finish Assessment
                 </button>
               </div>
             </>

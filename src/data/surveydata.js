@@ -830,11 +830,11 @@ export const coupleSurveyData = [
     questions: [
       {
         id: "8.1",
-        text: "Does at least one of you have good career prospects, or are you retired?",
+        text: "Does at least one of you have good career prospects, or are you both retired?",
         options: [
           { label: "Yes", value: 2, next: "8.2" },
           { label: "No", value: 0, next: "8.2" },
-          { label: "Retired", value: 8, next: "9.1" },
+          { label: "Both Retired", value: 8, next: "9.1" },
         ],
       },
       {

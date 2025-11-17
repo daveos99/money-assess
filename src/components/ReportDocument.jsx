@@ -410,6 +410,12 @@ export default function ReportDocument({ results }) {
         {!!themesWithAnswers.length && (
           <View style={styles.sectionCard} break>
             <Text style={styles.sectionTitle}>Detailed Breakdown</Text>
+            <Text style={styles.text}>
+              The following detailed breakdown shows the questions you answered and the
+              answer you selected along with the score assigned to that answer. Any
+              questions that scored 0 will be highlighted in red, indicating that it is
+              an area for potential improvement.
+            </Text>
             {themesWithAnswers.map(({ theme, answeredQuestions }, idx) => (
               <View key={theme.themeId} style={styles.themeBlock} wrap={false}>
                 <View style={styles.questionHeader}>
@@ -450,6 +456,11 @@ export default function ReportDocument({ results }) {
           <View style={styles.sectionCard} break>
             <Text style={styles.sectionTitle}>
               What's holding you back right now?
+            </Text>
+            <Text style={styles.text}>
+              The following details all the statements, including any custom statements
+              that you entered, that you selected as either True or Somewhat True
+              indicating they were holding you back from getting better at money.
             </Text>
             {answeredReasons.map((r) => {
               const rankIndex = reasons?.topThree?.findIndex(
