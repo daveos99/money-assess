@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   barRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 8,
+    marginBottom: 4,
   },
   barLabel: { width: "30%", fontSize: 10, color: "#0f172a" },
   barTrack: {
@@ -127,6 +127,19 @@ const styles = StyleSheet.create({
     borderBottom: "1px solid #E2E8F0",
     marginBottom: 6,
   },
+  questionHeaderText: {
+    width: "70%",
+    fontSize: 14,
+    fontWeight: 700,
+    color: "#0f172a",
+  },
+  questionHeaderAnswer: {
+    width: "30%",
+    textAlign: "right",
+    fontSize: 14,
+    fontWeight: 700,
+    color: "#0f172a",
+  },
   questionRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -134,7 +147,7 @@ const styles = StyleSheet.create({
     borderBottom: "1px solid #F1F5F9",
   },
   questionRowHighlight: {
-    backgroundColor: "#FEF2F2",
+    backgroundColor: "#FCA5A5",
   },
   questionText: { width: "70%", color: "#0f172a" },
   answerText: {
@@ -342,7 +355,7 @@ export default function ReportDocument({ results }) {
             src="https://calendar.app.google/ZduxYZefWuWEY3F3A"
             style={styles.ctaButton}
           >
-            Clich here to book a money chat with Dave - No cost or obligation
+            Click here to book a money chat with Dave - No cost or obligation
           </Link>
         </View>
 
@@ -400,18 +413,10 @@ export default function ReportDocument({ results }) {
             {themesWithAnswers.map(({ theme, answeredQuestions }, idx) => (
               <View key={theme.themeId} style={styles.themeBlock} wrap={false}>
                 <View style={styles.questionHeader}>
-                  <Text style={{ width: "70%", fontWeight: "bold" }}>
+                  <Text style={styles.questionHeaderText}>
                     {`${theme.themeName} • ${theme.percent}%`}
                   </Text>
-                  <Text
-                    style={{
-                      width: "30%",
-                      textAlign: "right",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Answer (Score)
-                  </Text>
+                  <Text style={styles.questionHeaderAnswer}>Answer (Score)</Text>
                 </View>
 
                 {answeredQuestions.map((q) => {
