@@ -88,6 +88,11 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
     color: "#475569",
   },
+  noteText: {
+    marginBottom: 8,
+    lineHeight: 1.2,
+    color: "#475569",
+  },
   barRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -410,7 +415,7 @@ export default function ReportDocument({ results }) {
         {!!themesWithAnswers.length && (
           <View style={styles.sectionCard} break>
             <Text style={styles.sectionTitle}>Detailed Breakdown</Text>
-            <Text style={styles.text}>
+            <Text style={styles.noteText}>
               The following detailed breakdown shows the questions you answered and the
               answer you selected along with the score assigned to that answer. Any
               questions that scored 0 will be highlighted in red, indicating that it is
@@ -457,7 +462,7 @@ export default function ReportDocument({ results }) {
             <Text style={styles.sectionTitle}>
               What's holding you back right now?
             </Text>
-            <Text style={styles.text}>
+            <Text style={styles.noteText}>
               The following details all the statements, including any custom statements
               that you entered, that you selected as either True or Somewhat True
               indicating they were holding you back from getting better at money.
