@@ -27,6 +27,14 @@ const styles = StyleSheet.create({
     color: "#0f172a",
     backgroundColor: "#F8FAFC",
   },
+  contentWrapper: {
+    flexGrow: 1,
+    flexDirection: "column",
+    paddingBottom: 80,
+  },
+  mainContent: {
+    flexGrow: 1,
+  },
   heroSection: {
     backgroundColor: "#312E81",
     borderRadius: 18,
@@ -215,9 +223,9 @@ const styles = StyleSheet.create({
   },
   ctaButton: {
     fontSize: 12,
-    color: "#0F172A",
+    color: "#FFFFFF",
     textDecoration: "none",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#158F84",
     borderRadius: 12,
     paddingVertical: 6,
     paddingHorizontal: 12,
@@ -261,6 +269,35 @@ const styles = StyleSheet.create({
     backgroundColor: "#E2E8F0",
     marginTop: 8,
     marginBottom: 12,
+  },
+  supportPanel: {
+    backgroundColor: "#1D4ED8",
+    borderRadius: 18,
+    padding: 18,
+    marginTop: 24,
+  },
+  supportPanelTitle: {
+    fontSize: 14,
+    fontWeight: 700,
+    color: "#FFFFFF",
+    marginBottom: 6,
+  },
+  supportPanelText: {
+    color: "#E0E7FF",
+    fontSize: 11,
+    lineHeight: 1.5,
+  },
+  supportPanelLink: {
+    marginTop: 12,
+    fontSize: 12,
+    fontWeight: 700,
+    color: "#FFFFFF",
+    textDecoration: "none",
+    backgroundColor: "rgba(255,255,255,0.15)",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 999,
+    alignSelf: "flex-start",
   },
   footerBar: {
     position: "absolute",
@@ -337,167 +374,186 @@ export default function ReportDocument({ results }) {
     <Document>
       {/* ===== PAGE 1 ===== */}
       <Page size="A4" style={styles.page}>
-        <View style={styles.heroSection}>
-          <Text style={styles.heroHeading}>Mastering Money Report</Text>
-          {recipientName && (
-            <Text style={styles.heroSubheading}>
-              {`Prepared for ${recipientName}`}
-            </Text>
-          )}
-          <Text style={styles.heroMeta}>{`${formattedDate} • ${formattedTime}`}</Text>
-          <View style={styles.heroStats}>
-            <View style={[styles.heroStatBlock, { marginRight: 12 }]}>
-              <Text style={styles.heroStatValue}>{overallPercent}%</Text>
-              <Text style={styles.heroStatLabel}>Overall Score</Text>
-            </View>
-            <View style={styles.heroStatBlock}>
-              <Text style={styles.heroStatValue}>{ratingForReport}</Text>
-              <Text style={styles.heroStatLabel}>Rating</Text>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.ctaCard}>
-          <Text style={styles.ctaHeading}>Do you want to get better at money?</Text>
-          <Text style={styles.ctaText}>
-            Reviewing your results with a money coach can help you define your next steps.
-          </Text>
-          <Link
-            src="https://calendar.app.google/ZduxYZefWuWEY3F3A"
-            style={styles.ctaButton}
-          >
-            Click here to book a money chat with Dave - No cost or obligation
-          </Link>
-        </View>
-
-        <View style={styles.sectionCard}>
-          <Text style={styles.sectionTitle}>Theme Summary</Text>
-          {themes.map((theme, index) => {
-            const barColor = THEME_COLORS[index % THEME_COLORS.length];
-            const width = Math.min(theme.percent, 100);
-            return (
-              <View key={theme.themeId} style={styles.barRow}>
-                <Text style={styles.barLabel}>{theme.themeName}</Text>
-                <View style={styles.barTrack}>
-                  <View
-                    style={[
-                      styles.barFillWrapper,
-                      { width: `${width}%` },
-                    ]}
-                  >
-                    <View
-                      style={[
-                        styles.barFill,
-                        {
-                          backgroundColor: barColor,
-                        },
-                      ]}
-                    />
-                    <View style={styles.barFillOverlay} />
-                  </View>
-                </View>
-                <Text style={{ width: 30, textAlign: "right", fontSize: 10 }}>
-                  {theme.percent}%
+        <View style={styles.contentWrapper}>
+          <View style={styles.mainContent}>
+            <View style={styles.heroSection}>
+              <Text style={styles.heroHeading}>Mastering Money Report</Text>
+              {recipientName && (
+                <Text style={styles.heroSubheading}>
+                  {`Prepared for ${recipientName}`}
                 </Text>
+              )}
+              <Text style={styles.heroMeta}>{`${formattedDate} • ${formattedTime}`}</Text>
+              <View style={styles.heroStats}>
+                <View style={[styles.heroStatBlock, { marginRight: 12 }]}>
+                  <Text style={styles.heroStatValue}>{overallPercent}%</Text>
+                  <Text style={styles.heroStatLabel}>Overall Score</Text>
+                </View>
+                <View style={styles.heroStatBlock}>
+                  <Text style={styles.heroStatValue}>{ratingForReport}</Text>
+                  <Text style={styles.heroStatLabel}>Rating</Text>
+                </View>
               </View>
-            );
-          })}
-        </View>
-
-        {hasTopThree && (
-          <View style={styles.sectionCard}>
-            <Text style={styles.sectionTitle}>Your Top Barriers</Text>
-            <View style={styles.topBarrierList}>
-              {reasons.topThree.map((r, i) => (
-                <View key={r.id} style={styles.topBarrierRow}>
-                  <Text style={styles.topBarrierBadge}>{`#${i + 1}`}</Text>
-                  <Text style={styles.topBarrierText}>{r.text}</Text>
-                </View>
-              ))}
             </View>
-          </View>
-        )}
 
-        {!!themesWithAnswers.length && (
-          <View style={styles.sectionCard} break>
-            <Text style={styles.sectionTitle}>Detailed Breakdown</Text>
-            <Text style={styles.noteText}>
-              The following detailed breakdown shows the questions you answered and the
-              answer you selected along with the score assigned to that answer. Any
-              questions that scored 0 will be highlighted in red, indicating that it is
-              an area for potential improvement.
-            </Text>
-            {themesWithAnswers.map(({ theme, answeredQuestions }, idx) => (
-              <View key={theme.themeId} style={styles.themeBlock} wrap={false}>
-                <View style={styles.questionHeader}>
-                  <Text style={styles.questionHeaderText}>
-                    {`${theme.themeName} • ${theme.percent}%`}
-                  </Text>
-                  <Text style={styles.questionHeaderAnswer}>Answer (Score)</Text>
+            <View style={styles.ctaCard}>
+              <Text style={styles.ctaHeading}>Do you want to get better at money?</Text>
+              <Text style={styles.ctaText}>
+                Reviewing your results with a money coach can help you define your next steps.
+              </Text>
+              <Link
+                src="https://calendar.app.google/ZduxYZefWuWEY3F3A"
+                style={styles.ctaButton}
+              >
+                Click here to book a money chat with Dave - No cost or obligation
+              </Link>
+            </View>
+
+            <View style={styles.sectionCard}>
+              <Text style={styles.sectionTitle}>Theme Summary</Text>
+              {themes.map((theme, index) => {
+                const barColor = THEME_COLORS[index % THEME_COLORS.length];
+                const width = Math.min(theme.percent, 100);
+                return (
+                  <View key={theme.themeId} style={styles.barRow}>
+                    <Text style={styles.barLabel}>{theme.themeName}</Text>
+                    <View style={styles.barTrack}>
+                      <View
+                        style={[
+                          styles.barFillWrapper,
+                          { width: `${width}%` },
+                        ]}
+                      >
+                        <View
+                          style={[
+                            styles.barFill,
+                            {
+                              backgroundColor: barColor,
+                            },
+                          ]}
+                        />
+                        <View style={styles.barFillOverlay} />
+                      </View>
+                    </View>
+                    <Text style={{ width: 30, textAlign: "right", fontSize: 10 }}>
+                      {theme.percent}%
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
+
+            {hasTopThree && (
+              <View style={styles.sectionCard}>
+                <Text style={styles.sectionTitle}>Your Top Barriers</Text>
+                <View style={styles.topBarrierList}>
+                  {reasons.topThree.map((r, i) => (
+                    <View key={r.id} style={styles.topBarrierRow}>
+                      <Text style={styles.topBarrierBadge}>{`#${i + 1}`}</Text>
+                      <Text style={styles.topBarrierText}>{r.text}</Text>
+                    </View>
+                  ))}
                 </View>
+              </View>
+            )}
 
-                {answeredQuestions.map((q) => {
-                  const highlight =
-                    typeof q.score === "number" && Number(q.score) === 0;
-                  return (
-                    <View
-                      key={q.id}
-                      style={[
-                        styles.questionRow,
-                        highlight && styles.questionRowHighlight,
-                      ]}
-                    >
-                      <Text style={styles.questionText}>{q.text}</Text>
-                      <Text style={styles.answerText}>
-                        {q.selectedLabel} ({q.score})
+            {!!themesWithAnswers.length && (
+              <View style={styles.sectionCard} break>
+                <Text style={styles.sectionTitle}>Detailed Breakdown</Text>
+                <Text style={styles.noteText}>
+                  The following detailed breakdown shows the questions you answered and the
+                  answer you selected along with the score assigned to that answer. Any
+                  questions that scored 0 will be highlighted in red, indicating that it is
+                  an area for potential improvement.
+                </Text>
+                {themesWithAnswers.map(({ theme, answeredQuestions }, idx) => (
+                  <View key={theme.themeId} style={styles.themeBlock} wrap={false}>
+                    <View style={styles.questionHeader}>
+                      <Text style={styles.questionHeaderText}>
+                        {`${theme.themeName} • ${theme.percent}%`}
                       </Text>
+                      <Text style={styles.questionHeaderAnswer}>Answer (Score)</Text>
+                    </View>
+
+                    {answeredQuestions.map((q) => {
+                      const highlight =
+                        typeof q.score === "number" && Number(q.score) === 0;
+                      return (
+                        <View
+                          key={q.id}
+                          style={[
+                            styles.questionRow,
+                            highlight && styles.questionRowHighlight,
+                          ]}
+                        >
+                          <Text style={styles.questionText}>{q.text}</Text>
+                          <Text style={styles.answerText}>
+                            {q.selectedLabel} ({q.score})
+                          </Text>
+                        </View>
+                      );
+                    })}
+
+                    {idx > 0 && idx % 3 === 0 && (
+                      <View style={{ pageBreakAfter: "always" }} />
+                    )}
+                  </View>
+                ))}
+              </View>
+            )}
+
+            {answeredReasons.length > 0 && (
+              <View style={styles.sectionCard} break>
+                <Text style={styles.sectionTitle}>
+                  What's holding you back right now?
+                </Text>
+                <Text style={styles.noteText}>
+                  The following details all the statements, including any custom statements
+                  that you entered, that you selected as either True or Somewhat True
+                  indicating they were holding you back from getting better at money.
+                </Text>
+                <View style={styles.reasonDivider} />
+                {answeredReasons.map((r) => {
+                  const rankIndex = reasons?.topThree?.findIndex(
+                    (top) => top.id === r.id
+                  );
+                  const rankSuffix = rankIndex > -1 ? ` (#${rankIndex + 1})` : "";
+                  const answer = r.answer || "";
+                  const chipStyle =
+                    answer === "True"
+                      ? styles.reasonChipTrue
+                      : answer === "Somewhat True"
+                      ? styles.reasonChipSomewhat
+                      : styles.reasonChipFalse;
+                  return (
+                    <View key={r.id} style={styles.reasonRow}>
+                      <Text style={styles.reasonText}>
+                        {r.text}
+                        {rankSuffix}
+                      </Text>
+                      <Text style={[styles.reasonChip, chipStyle]}>{answer}</Text>
                     </View>
                   );
                 })}
-
-                {idx > 0 && idx % 3 === 0 && (
-                  <View style={{ pageBreakAfter: "always" }} />
-                )}
               </View>
-            ))}
+            )}
           </View>
-        )}
 
-        {answeredReasons.length > 0 && (
-          <View style={styles.sectionCard} break>
-            <Text style={styles.sectionTitle}>
-              What's holding you back right now?
+          <View style={styles.supportPanel} wrap={false}>
+            <Text style={styles.supportPanelTitle}>
+              Support the FIGHT MND cause
             </Text>
-            <Text style={styles.noteText}>
-              The following details all the statements, including any custom statements
-              that you entered, that you selected as either True or Somewhat True
-              indicating they were holding you back from getting better at money.
+            <Text style={styles.supportPanelText}>
+              Motor neurone disease is a terrible beast with no effective treatment or cure. My grandfather died from this disease and it is my preferred charity to support research into treatments and hopefully one day a cure. If you found this assessment and/or my coaching useful then please donate if you can.
             </Text>
-            <View style={styles.reasonDivider} />
-            {answeredReasons.map((r) => {
-              const rankIndex = reasons?.topThree?.findIndex(
-                (top) => top.id === r.id
-              );
-              const rankSuffix = rankIndex > -1 ? ` (#${rankIndex + 1})` : "";
-              const answer = r.answer || "";
-              const chipStyle =
-                answer === "True"
-                  ? styles.reasonChipTrue
-                  : answer === "Somewhat True"
-                  ? styles.reasonChipSomewhat
-                  : styles.reasonChipFalse;
-              return (
-                <View key={r.id} style={styles.reasonRow}>
-                  <Text style={styles.reasonText}>
-                    {r.text}
-                    {rankSuffix}
-                  </Text>
-                  <Text style={[styles.reasonChip, chipStyle]}>{answer}</Text>
-                </View>
-              );
-            })}
+            <Link
+              src="https://fightmnd.org.au/"
+              style={styles.supportPanelLink}
+            >
+              Click here to donate to FIGHT MND
+            </Link>
           </View>
-        )}
+        </View>
         <View style={styles.footerBar} fixed>
           <Text style={styles.footerText}>
             {`Mastering Money Assessment ${VERSION_LABEL}`}
