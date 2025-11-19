@@ -8,7 +8,7 @@ import BackButton from "../components/BackButton";
 const SINGLE_PRESET_REASONS = [
   { id: "r1", text: "I am not that motivated to get better at money" },
   { id: "r2", text: "I don't need to get better at money as I am already good enough" },
-  { id: "r3", text: "The thought of tring to get better at money feels overwhelming or unpleasant" },
+  { id: "r3", text: "The thought of trying to get better at money feels overwhelming or unpleasant" },
   { id: "r4", text: "I am too stressed about or ashamed of my current situation and can't think about getting better at money" },
   { id: "r5", text: "I don't want to admit that I have a money problem" },
   { id: "r6", text: "No matter what I do I am screwed anyway, so why bother trying to get better at money" },
@@ -44,7 +44,7 @@ const SINGLE_PRESET_REASONS = [
 const COUPLE_PRESET_REASONS = [
   { id: "r1", text: "We are not that motivated to get better at money" },
   { id: "r2", text: "We don't need to get better at money as we are already good enough" },
-  { id: "r3", text: "The thought of tring to get better at money feels overwhelming or unpleasant" },
+  { id: "r3", text: "The thought of trying to get better at money feels overwhelming or unpleasant" },
   { id: "r4", text: "We are too stressed about or ashamed of our current situation and can't think about getting better at money" },
   { id: "r5", text: "We don't want to admit that we have a money problem" },
   { id: "r6", text: "No matter what we do we are screwed anyway, so why bother trying to get better at money" },
