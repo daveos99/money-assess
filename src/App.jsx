@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import WelcomePage from "./pages/WelcomePage";
 import PreferredNamePage from "./pages/PreferredNamePage";
 import PleaseNotePage from "./pages/PleaseNotePage";
@@ -42,20 +42,47 @@ export default function App() {
   const participantType = trimmedPartnerName ? "couple" : "single";
   const surveyData = surveyDataByType[participantType] ?? [];
 
+  const logAssessmentCompletion = useCallback(async (submission) => {
+    if (!submission) return;
+    try {
+      const response = await fetch("/api/logAssessment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submission),
+      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Failed to log assessment completion:", errorText);
+      }
+    } catch (error) {
+      console.error("Unexpected error logging assessment completion:", error);
+    }
+  }, []);
+
   const handleSurveyComplete = (computedResults) => {
-    const payload = {
+    const participantPayload = {
       primary: trimmedPrimaryName,
       partner: trimmedPartnerName,
     };
-    setResults({
+    const preferredName = trimmedPartnerName
+      ? `${trimmedPrimaryName} & ${trimmedPartnerName}`
+      : trimmedPrimaryName;
+    const mergedResults = {
       ...computedResults,
       participantType,
-      participantNames: payload,
-      preferredName: trimmedPartnerName
-        ? `${trimmedPrimaryName} & ${trimmedPartnerName}`
-        : trimmedPrimaryName,
-    });
+      participantNames: participantPayload,
+      preferredName,
+    };
+    setResults(mergedResults);
     setStage("results");
+    logAssessmentCompletion({
+      participantNames: participantPayload,
+      participantType,
+      preferredName,
+      results: mergedResults,
+    });
   };
 
   const handleRestart = () => {
