@@ -12,6 +12,26 @@ import {
   persistAssessmentSnapshot,
 } from "./utils/assessmentStorage";
 
+function getRating(overallPercent = 0) {
+  if (overallPercent >= 90) return "Money Master";
+  if (overallPercent >= 80) return "Great at Money";
+  if (overallPercent >= 70) return "Good with Money";
+  if (overallPercent >= 60) return "OK with Money";
+  if (overallPercent >= 50) return "Poor with Money";
+  if (overallPercent >= 40) return "Need Help with Money";
+  return "Failing with Money";
+}
+
+function getRatingForReport(overallPercent = 0) {
+  if (overallPercent >= 90) return "Money Master";
+  if (overallPercent >= 80) return "Great at Money";
+  if (overallPercent >= 70) return "Good with Money";
+  if (overallPercent >= 60) return "OK with Money";
+  if (overallPercent >= 50) return "Poor with Money";
+  if (overallPercent >= 40) return "Needs Help with Money";
+  return "Failing with Money";
+}
+
 export default function App() {
   const snapshotRef = useRef(loadAssessmentSnapshot());
   const snapshot = snapshotRef.current;
@@ -66,6 +86,9 @@ export default function App() {
       primary: trimmedPrimaryName,
       partner: trimmedPartnerName,
     };
+    const overallPercent = computedResults?.overallPercent ?? 0;
+    const rating = getRating(overallPercent);
+    const ratingForReport = getRatingForReport(overallPercent);
     const preferredName = trimmedPartnerName
       ? `${trimmedPrimaryName} & ${trimmedPartnerName}`
       : trimmedPrimaryName;
@@ -74,6 +97,8 @@ export default function App() {
       participantType,
       participantNames: participantPayload,
       preferredName,
+      rating,
+      ratingForReport,
     };
     setResults(mergedResults);
     setStage("results");
