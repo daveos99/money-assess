@@ -48,15 +48,22 @@ export default async function handler(req, res) {
       body: JSON.stringify(payload),
     });
 
+    const text = await response.text();
+
     if (!response.ok) {
-      const text = await response.text();
+      console.error("Google Sheet webhook failed", response.status, text);
       return res.status(502).json({
         error: "Failed to append row to Google Sheet",
+        status: response.status,
         details: text || response.statusText,
       });
     }
 
-    return res.status(200).json({ success: true });
+    console.log("Google Sheet webhook success", response.status, text);
+
+    return res
+      .status(200)
+      .json({ success: true, webhookStatus: response.status, webhookBody: text || null });
   } catch (error) {
     console.error("Failed to hit Google Sheets webhook:", error);
     return res
