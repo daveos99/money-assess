@@ -22,7 +22,11 @@ export default async function handler(req, res) {
   }
 
   const payload = {
-    submittedAt: new Date().toISOString(),
+    submittedAt: new Date().toLocaleString('en-AU', {
+      timeZone: 'Australia/Sydney',   // pick your zone; without this Vercel defaults to UTC
+      hour12: false,
+      timeZoneName: 'short',
+      }),
     participantNames,
     participantType,
     preferredName,
