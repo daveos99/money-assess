@@ -17,7 +17,7 @@ const SINGLE_PRESET_REASONS = [
   { id: "r9", text: "I cannot control or do not want to control my spending to get better at money" },
   {
     id: "r10",
-    text: "I can't get better at money as I have limited or no financial literacy about things like budgeting, compounding, super, credit",
+    text: "I can't get better at money as I have limited or no financial literacy about things like budgeting, compound interest, super or credit",
   },
   { id: "r11", text: "I don't want to have to create or run a budget to get better at money" },
   { id: "r12", text: "I can't get better at money as I don't understand how money works" },
@@ -29,10 +29,10 @@ const SINGLE_PRESET_REASONS = [
   { id: "r18", text: "I can't get better at money as I am no good with money" },
   { id: "r19", text: "I can't get better at money as I don't earn enough money to be able to save any" },
   { id: "r20", text: "I can't get better at money as I am scared or anxious about money" },
-  { id: "r21", text: "I can't get better at money as I have bigger problems (Health, Relationships, Addiction, Gambling, etc.)" },
+  { id: "r21", text: "I can't get better at money as I have bigger problems (health, relationships, addiction, gambling, etc.)" },
   {
     id: "r22",
-    text: "My spending provides relief from other problems (Retail therapy) and might stop me getting better at money",
+    text: "My spending provides relief from other problems (retail therapy) and might stop me getting better at money",
   },
   { id: "r23", text: "I am too busy and don't have time to get better at money" },
   { id: "r24", text: "I don't trust other people to give me good advice on how to get better at money" },
@@ -53,7 +53,7 @@ const COUPLE_PRESET_REASONS = [
   { id: "r9", text: "We cannot control or do not want to control our spending to get better at money" },
   {
     id: "r10",
-    text: "We can't get better at money as we have limited or no financial literacy about things like budgeting, compounding, super, credit",
+    text: "We can't get better at money as we have limited or no financial literacy about things like budgeting, compound interest, super or credit",
   },
   { id: "r11", text: "We don't want to have to create or run a budget to get better at money" },
   { id: "r12", text: "We can't get better at money as we don't understand how money works" },
@@ -65,10 +65,10 @@ const COUPLE_PRESET_REASONS = [
   { id: "r18", text: "We can't get better at money as we are no good with money" },
   { id: "r19", text: "We can't get better at money as we don't earn enough money to be able to save any" },
   { id: "r20", text: "We can't get better at money as we are scared or anxious about money" },
-  { id: "r21", text: "We can't get better at money as we have bigger problems (Health, Relationships, Addiction, Gambling, etc.)" },
+  { id: "r21", text: "We can't get better at money as we have bigger problems (health, relationships, addiction, gambling, etc.)" },
   {
     id: "r22",
-    text: "Our spending provides relief from other problems (Retail therapy) and might stop us getting better at money",
+    text: "Our spending provides relief from other problems (retail therapy) and might stop us getting better at money",
   },
   { id: "r23", text: "We are too busy and don't have time to get better at money" },
   { id: "r24", text: "We don't trust other people to give us good advice on how to get better at money" },
@@ -326,7 +326,7 @@ export default function ReasonsPage({
           </p>
           <p className="text-gray-700 text-lg mb-6">
             At the end you will be asked to rank up to 3 statements as your top 
-            reasons for what’s stopping you get better at money.
+            reasons for what’s stopping you from getting better at money.
           </p>
           <button
             onClick={beginReasonsFlow}

@@ -70,7 +70,7 @@ export const singleSurveyData = [
       },
       {
         id: "2.1.1",
-        text: "Is your emergency fund in a separate online savings account?",
+        text: "Is your emergency fund kept separate from other funds (e.g. separate online savings account)?",
         options: [
           { label: "Yes", value: 1, next: "2.1.2" },
           { label: "No", value: 0, next: "2.1.2" },
@@ -129,7 +129,7 @@ export const singleSurveyData = [
   {
     themeId: "4",
     themeName: "Bank Accounts",
-    description: "You should setup your banks accounts to organise your money and maximise the amount of it you keep.",
+    description: "You should set up your bank accounts to organise your money and maximise the amount of it you keep.",
     questions: [
       {
         id: "4.1",
@@ -142,7 +142,7 @@ export const singleSurveyData = [
       },
       {
         id: "4.2",
-        text: "Do you get maximum interest on your savings accounts?",
+        text: "Do you get maximum interest on your savings accounts or use mortgage offset account for savings?",
         options: [
           { label: "Yes", value: 2, next: "4.3" },
           { label: "No", value: 0, next: "4.3" },
@@ -186,8 +186,8 @@ export const singleSurveyData = [
   },
   {
     themeId: "5",
-    themeName: "Consumer debt",
-    description: "Consumer debt eats away at your ability save and encourages you to live beyond your means.",
+    themeName: "Consumer Debt",
+    description: "Consumer debt eats away at your ability save and can cause you to live beyond your means.",
     questions: [
       {
         id: "5.1",
@@ -260,7 +260,7 @@ export const singleSurveyData = [
   {
     themeId: "6",
     themeName: "Housing",
-    description: "Having stable affordable housing is an important pillar of having financial wellbeing",
+    description: "Having stable and affordable housing is an important pillar of having financial wellbeing.",
     questions: [
       {
         id: "6.1",
@@ -367,7 +367,7 @@ export const singleSurveyData = [
   {
     themeId: "9",
     themeName: "Insurances",
-    description: "Having good insurance ensures that unfortunate events don't take you down.",
+    description: "Having good insurance ensures that unexpected events don't take you down.",
     questions: [
       {
         id: "9.1",
@@ -406,12 +406,12 @@ export const singleSurveyData = [
   },
   {
     themeId: "10",
-    themeName: "Estate planning",
-    description: "Having an appropriate will and powers of attorney will ensure that you and your assets end up where you want.",
+    themeName: "Estate Planning",
+    description: "Having an appropriate Will and Powers of Attorney will ensure that you and your assets end up where you want.",
     questions: [
       {
         id: "10.1",
-        text: "Do you have a properly prepared and signed will?",
+        text: "Do you have a properly prepared and signed Will?",
         options: [
           { label: "Yes", value: 4, next: "10.2" },
           { label: "No", value: 0, next: "10.2" },
@@ -419,7 +419,7 @@ export const singleSurveyData = [
       },
       {
         id: "10.2",
-        text: "Do you have a properly signed medical and financial power of attorney?",
+        text: "Do you have a properly signed medical and financial Power of Attorney?",
         options: [
           { label: "Yes", value: 4, next: "11.1" },
           { label: "No", value: 0, next: "11.1" },
@@ -434,7 +434,7 @@ export const singleSurveyData = [
     questions: [
       {
         id: "11.1",
-        text: "Would you consider yourself to be financially literate, understanding things like interest, compound interest, investment risk?",
+        text: "Would you consider yourself to be financially literate, understanding things like interest, compound interest and investment risk?",
         options: [
           { label: "Yes", value: 2, next: "11.2" },
           { label: "No", value: 0, next: "11.2" },
@@ -450,7 +450,7 @@ export const singleSurveyData = [
       },
       {
         id: "11.3",
-        text: "Do you continue to educate yourself about personal finances through things like books, podcasts, news, courses?",
+        text: "Do you continue to educate yourself about personal finances through things like books, podcasts, news or courses?",
         options: [
           { label: "Yes", value: 4, next: "12.1" },
           { label: "No", value: 0, next: "12.1" },
@@ -461,7 +461,7 @@ export const singleSurveyData = [
   {
     themeId: "12",
     themeName: "Security",
-    description: "It's hard work to earn money, and it's important you protect it from bad actors that would like to take it from you",
+    description: "It's hard work to earn money, and it's important you protect it from bad people that would like to take it from you.",
     questions: [
       {
         id: "12.1",
@@ -570,7 +570,7 @@ export const coupleSurveyData = [
       },
       {
         id: "2.1.1",
-        text: "Is your emergency fund in a separate online savings account?",
+        text: "Is your emergency fund kept separate from other funds (e.g. separate online savings account)?",
         options: [
           { label: "Yes", value: 1, next: "2.1.2" },
           { label: "No", value: 0, next: "2.1.2" },
@@ -629,7 +629,7 @@ export const coupleSurveyData = [
   {
     themeId: "4",
     themeName: "Bank Accounts",
-    description: "You should setup your banks accounts to organise your money and maximise the amount of it you keep.",
+    description: "You should set up your bank accounts to organise your money and maximise the amount of it you keep.",
     questions: [
       {
         id: "4.1",
@@ -642,7 +642,7 @@ export const coupleSurveyData = [
       },
       {
         id: "4.2",
-        text: "Do you get maximum interest on your savings accounts?",
+        text: "Do you get maximum interest on your savings accounts or use mortgage offset account for savings?",
         options: [
           { label: "Yes", value: 2, next: "4.3" },
           { label: "No", value: 0, next: "4.3" },
@@ -686,8 +686,8 @@ export const coupleSurveyData = [
   },
   {
     themeId: "5",
-    themeName: "Consumer debt",
-    description: "Consumer debt eats away at your ability save and encourages you to live beyond your means.",
+    themeName: "Consumer Debt",
+    description: "Consumer debt eats away at your ability save and can cause you to live beyond your means.",
     questions: [
       {
         id: "5.1",
@@ -760,7 +760,7 @@ export const coupleSurveyData = [
   {
     themeId: "6",
     themeName: "Housing",
-    description: "Having stable affordable housing is an important pillar of having financial wellbeing",
+    description: "Having stable and affordable housing is an important pillar of having financial wellbeing.",
     questions: [
       {
         id: "6.1",
@@ -839,7 +839,7 @@ export const coupleSurveyData = [
       },
       {
         id: "8.2",
-        text: "Does either of you continue to learn, develop and educate themself to further their career?",
+        text: "Do either of you continue to learn, develop and educate yourself to further your career?",
         options: [
           { label: "Yes", value: 2, next: "8.3" },
           { label: "No", value: 0, next: "8.3" },
@@ -867,7 +867,7 @@ export const coupleSurveyData = [
   {
     themeId: "9",
     themeName: "Insurances",
-    description: "Having good insurance ensures that unfortunate events don't take you down.",
+    description: "Having good insurance ensures that unexpected events don't take you down.",
     questions: [
       {
         id: "9.1",
@@ -906,12 +906,12 @@ export const coupleSurveyData = [
   },
   {
     themeId: "10",
-    themeName: "Estate planning",
-    description: "Having an appropriate will and powers of attorney will ensure that you and your assets end up where you want.",
+    themeName: "Estate Planning",
+    description: "Having an appropriate Will and Powers of Attorney will ensure that you and your assets end up where you want.",
     questions: [
       {
         id: "10.1",
-        text: "Do you and your partner have a properly prepared and signed will?",
+        text: "Do you and your partner have a properly prepared and signed Will?",
         options: [
           { label: "Yes", value: 4, next: "10.2" },
           { label: "No", value: 0, next: "10.2" },
@@ -919,7 +919,7 @@ export const coupleSurveyData = [
       },
       {
         id: "10.2",
-        text: "Do you and your partner have a properly signed medical and financial power of attorney?",
+        text: "Do you and your partner have a properly signed medical and financial Power of Attorney?",
         options: [
           { label: "Yes", value: 4, next: "11.1" },
           { label: "No", value: 0, next: "11.1" },
@@ -934,7 +934,7 @@ export const coupleSurveyData = [
     questions: [
       {
         id: "11.1",
-        text: "Would you consider either one of you to be financially literate, understanding things like interest, compound interest, investment risk?",
+        text: "Would you consider either one of you to be financially literate, understanding things like interest, compound interest and investment risk?",
         options: [
           { label: "Yes", value: 2, next: "11.2" },
           { label: "No", value: 0, next: "11.2" },
@@ -942,7 +942,7 @@ export const coupleSurveyData = [
       },
       {
         id: "11.2",
-        text: "Is either of you confident you could select and work with a financial advisor, mortgage broker or accountant?",
+        text: "Are either of you confident you could select and work with a financial advisor, mortgage broker or accountant?",
         options: [
           { label: "Yes", value: 2, next: "11.3" },
           { label: "No", value: 0, next: "11.3" },
@@ -950,7 +950,7 @@ export const coupleSurveyData = [
       },
       {
         id: "11.3",
-        text: "Do either of you continue to educate yourself about personal finances through things like books, podcasts, news, courses?",
+        text: "Do either of you continue to educate yourself about personal finances through things like books, podcasts, news or courses?",
         options: [
           { label: "Yes", value: 4, next: "12.1" },
           { label: "No", value: 0, next: "12.1" },
@@ -961,7 +961,7 @@ export const coupleSurveyData = [
   {
     themeId: "12",
     themeName: "Security",
-    description: "It's hard work to earn money, and it's important you protect it from bad actors that would like to take it from you",
+    description: "It's hard work to earn money, and it's important you protect it from bad people that would like to take it from you.",
     questions: [
       {
         id: "12.1",
