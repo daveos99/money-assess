@@ -368,7 +368,7 @@ export default function ReasonsPage({
                 Add Your Own Reasons
               </h2>
               <p className="text-gray-600 mb-6 text-sm">
-                Add up to three other reasons that are stopping you get better at money. 
+                Add up to three other reasons that are stopping you from getting better at money. 
               </p>
 
               <div className="space-y-4">
